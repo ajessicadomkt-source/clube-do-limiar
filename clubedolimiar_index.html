@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clube do Limiar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F5F0E8;
+    --bg2: #EDE6D6;
+    --paper: #FAF7F2;
+    --ink: #2A2218;
+    --ink2: #5C5040;
+    --ink3: #9C8E7A;
+    --accent: #7A5C3A;
+    --accent2: #C4A882;
+    --border: rgba(90, 70, 45, 0.15);
+    --border2: rgba(90, 70, 45, 0.3);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Textura de fundo */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse at 20% 0%, rgba(180,140,90,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 100%, rgba(120,90,50,0.1) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrapper { position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 0.95;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.4s forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--ink3);
+    letter-spacing: 0.05em;
+    margin-bottom: 4rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.6s forwards;
+  }
+
+  .hero-divider {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, var(--accent2), transparent);
+    margin: 0 auto 4rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    opacity: 0;
+    animation: fadeUp 1s ease 1.2s forwards;
+  }
+
+  /* MANIFESTO */
+  .manifesto {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    margin-bottom: 3rem;
+    display: block;
+  }
+
+  .manifesto p {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+    line-height: 1.85;
+    color: var(--ink2);
+    margin-bottom: 1.75rem;
+  }
+
+  .manifesto-destaque {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(1.4rem, 3vw, 1.8rem) !important;
+    color: var(--ink) !important;
+    padding-left: 1.5rem;
+    border-left: 1.5px solid var(--accent);
+    margin: 2.5rem 0 !important;
+  }
+
+  .epigrafe {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem !important;
+    color: var(--ink3) !important;
+    text-align: right;
+    font-style: italic;
+    margin-top: 3rem !important;
+  }
+
+  /* SEPARADOR ORNAMENTAL */
+  .ornament {
+    text-align: center;
+    padding: 2rem 0;
+    color: var(--accent2);
+    font-size: 1.2rem;
+    letter-spacing: 0.5em;
+  }
+
+  /* COMO FUNCIONA */
+  .como {
+    background: var(--bg2);
+    padding: 6rem 2rem;
+  }
+
+  .como-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .como-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .como-item {
+    border-top: 1px solid var(--border2);
+    padding-top: 1.5rem;
+  }
+
+  .como-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    color: var(--accent2);
+    line-height: 1;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .como-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .como-desc {
+    font-size: 0.82rem;
+    color: var(--ink3);
+    line-height: 1.7;
+  }
+
+  .section-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  /* FORMULÁRIO */
+  .form-section {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+
+  .form-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--ink3);
+    margin-bottom: 3rem;
+    line-height: 1.7;
+  }
+
+  .form-textarea {
+    resize: none;
+    min-height: 80px;
+    line-height: 1.6;
+  }
+
+  .form-btn {
+    width: 100%;
+    margin-top: 2.5rem;
+    padding: 1rem 2rem;
+    background: var(--accent);
+    color: var(--paper);
+    border: none;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.15s;
+  }
+
+  .form-btn:hover { background: var(--ink); }
+  .form-btn:active { transform: scale(0.99); }
+
+  /* SUCESSO */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 3rem 0;
+  }
+
+  .success-msg.visible { display: block; }
+
+  .success-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+
+  .success-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--ink3);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 2rem;
+    background: #3d6b47;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: background 0.3s;
+  }
+
+  .whatsapp-btn:hover { background: #2d5237; }
+
+  /* RODAPÉ */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .footer-nome {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--ink3);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink3);
+    opacity: 0.5;
+    margin-top: 0.4rem;
+  }
+
+  /* ANIMAÇÕES */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Um convite</p>
+    <h1 class="hero-title">Clube do<br><em>Limiar</em></h1>
+    <p class="hero-sub">investigação simbólica da vida interior</p>
+    <div class="hero-divider"></div>
+    <p class="scroll-hint">↓ &nbsp; continue</p>
+  </section>
+
+  <!-- MANIFESTO -->
+  <section class="manifesto">
+    <span class="section-label reveal">Manifesto</span>
+
+    <p class="reveal">Existe uma parte de você que nunca dorme, nunca para, nunca esquece. Ela fala em sonhos, age nos seus padrões, escreve os seus medos mais antigos. Você a chama de instinto, de intuição, de pressentimento. Nós a chamamos de inconsciente.</p>
+
+    <p class="reveal">A maioria das pessoas passa a vida inteira sem investigá-la. Não por falta de curiosidade — mas porque ninguém criou um espaço para isso.</p>
+
+    <p class="manifesto-destaque reveal">O Clube do Limiar existe para ser esse espaço.</p>
+
+    <p class="reveal">Não somos terapia. Não somos curso. Não somos religião. Somos um círculo de investigação — um lugar onde símbolos, sonhos, arquétipos e mitos são levados a sério como linguagens mais antigas que a palavra. Onde a vida interior tem o mesmo peso que a exterior.</p>
+
+    <p class="reveal">Acreditamos que o autoconhecimento não acontece apenas no divã ou na meditação. Acontece também num filme assistido com atenção, num sonho anotado de madrugada, num símbolo que aparece de novo e de novo sem que você saiba por quê.</p>
+
+    <p class="reveal">Nos reunimos para atravessar esse limiar juntos. Sem pressa de concluir, sem medo de aprofundar. Com Jung e com cinema. Com neurociência e com mitologia. Com o que vier — desde que venha do fundo.</p>
+
+    <p class="epigrafe reveal">Conhece-te a ti mesmo. — Oráculo de Delfos</p>
+  </section>
+
+  <div class="ornament reveal">· · ·</div>
+
+  <!-- COMO FUNCIONA -->
+  <section class="como">
+    <div class="como-inner">
+      <span class="section-label reveal">Como funciona</span>
+      <h2 class="section-titulo reveal">Um encontro por mês.<br>Uma vida por dentro.</h2>
+
+      <div class="como-grid">
+        <div class="como-item reveal">
+          <span class="como-num">01</span>
+          <span class="como-titulo">Tema mensal</span>
+          <p class="como-desc">Cada mês tem um tema, uma curadoria de livros e filmes, e atividades para fazer em casa no seu tempo.</p>
+        </div>
+        <div class="como-item reveal">
+          <span class="como-num">02</span>
+          <span class="como-titulo">Encontro presencial</span>
+          <p class="como-desc">Uma vez por mês nos reunimos para debater, compartilhar e aprofundar o que cada um viveu com o tema.</p>
+        </div>
+        <div class="como-item reveal">
+          <span class="como-num">03</span>
+          <span class="como-titulo">Círculo pequeno</span>
+          <p class="como-desc">Máximo de 15 pessoas. O tamanho é intencional — intimidade e profundidade não cabem em multidões.</p>
+        </div>
+        <div class="como-item reveal">
+          <span class="como-num">04</span>
+          <span class="como-titulo">Sem hierarquia</span>
+          <p class="como-desc">Não há guru nem respostas certas. Há uma facilitadora e um círculo de pessoas curiosas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CADASTRO -->
+  <section class="form-section">
+    <span class="section-label reveal">Quero participar</span>
+    <h2 class="section-titulo reveal" style="margin-bottom: 1.5rem;">Atravesse o<br><em style="font-family:'Cormorant Garamond',serif; font-style:italic; color:var(--accent);">limiar</em></h2>
+
+    <p class="form-intro reveal">As vagas são limitadas e o ingresso é por convite ou cadastro. Clique abaixo para preencher o formulário — e depois entre no grupo do WhatsApp do clube.</p>
+
+    <div style="display:flex; flex-direction:column; gap: 1rem; margin-top: 2.5rem;">
+      <a class="form-btn reveal" href="https://form.respondi.app/HTJEQr8q" target="_blank" style="display:block; text-align:center; text-decoration:none; padding: 1rem 2rem;">
+        Preencher o cadastro
+      </a>
+
+      <div class="reveal" style="border-top: 1px solid var(--border); padding-top: 2rem; margin-top: 1rem;">
+        <p style="font-family:'Cormorant Garamond',serif; font-size:1rem; color:var(--ink3); margin-bottom: 1.25rem; line-height:1.7;">
+          Depois de preencher, entre no grupo do WhatsApp para acompanhar os próximos passos.
+        </p>
+        <a class="whatsapp-btn" href="https://chat.whatsapp.com/LINK_DO_SEU_GRUPO" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Entrar no grupo
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RODAPÉ -->
+  <footer>
+    <p class="footer-nome">Clube do Limiar</p>
+    <p class="footer-sub">investigação simbólica da vida interior</p>
+  </footer>
+
+</div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
