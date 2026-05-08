@@ -3,899 +3,257 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Clube do Limiar</title>
+<title>Clube do Limiar — Membros</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@200;300;400&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --void: #0A0812;
-  --deep: #100E1E;
-  --card: #13112000;
-  --accent: #A87FD4;
-  --accent-dim: #6B4FA0;
-  --accent-glow: rgba(168, 127, 212, 0.15);
-  --gold: #C8A96A;
-  --text: #F0ECF8;
-  --text-mid: #C4BAD8;
-  --text-dim: #7A7090;
-  --border: rgba(168, 127, 212, 0.12);
-  --border-mid: rgba(168, 127, 212, 0.25);
-  --border-bright: rgba(168, 127, 212, 0.45);
-}
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--void);
-  color: var(--text);
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  overflow-x: hidden;
-  cursor: none;
-}
-
-/* CURSOR */
-.cursor {
-  width: 5px; height: 5px;
-  background: var(--accent);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s;
-  box-shadow: 0 0 10px var(--accent);
-}
-
-.cursor-ring {
-  width: 26px; height: 26px;
-  border: 1px solid rgba(168, 127, 212, 0.35);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s;
-}
-
-/* STARFIELD */
-#starfield {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.7;
-  transition: opacity 0.4s ease;
-}
-
-/* NEBULOSA — mais presente */
-.nebula-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 80% 60% at 10% 20%, rgba(100, 50, 180, 0.32) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 70% at 88% 75%, rgba(70, 30, 140, 0.28) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 55% 45%, rgba(80, 40, 160, 0.15) 0%, transparent 65%),
-    radial-gradient(ellipse 35% 50% at 30% 90%, rgba(50, 20, 100, 0.2) 0%, transparent 60%);
-}
-
-.wrapper { position: relative; z-index: 2; }
-
-/* ====== HERO ====== */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  text-align: center;
-  position: relative;
-}
-
-/* Anel único, mais delicado */
-.orbit {
-  position: absolute;
-  border-radius: 50%;
-  top: 50%; left: 50%;
-  pointer-events: none;
-}
-
-.orbit-1 {
-  width: 460px; height: 460px;
-  border: 1px solid rgba(168, 127, 212, 0.08);
-  transform: translate(-50%, -50%);
-  animation: spin 50s linear infinite;
-}
-
-.orbit-1::before {
-  content: '';
-  position: absolute;
-  width: 5px; height: 5px;
-  background: var(--accent);
-  border-radius: 50%;
-  top: -2.5px; left: 50%;
-  box-shadow: 0 0 14px var(--accent), 0 0 28px rgba(168,127,212,0.4);
-}
-
-.orbit-2 {
-  width: 320px; height: 320px;
-  border: 1px solid rgba(200, 169, 106, 0.07);
-  transform: translate(-50%, -50%);
-  animation: spin 80s linear infinite reverse;
-}
-
-.orbit-2::before {
-  content: '';
-  position: absolute;
-  width: 3px; height: 3px;
-  background: var(--gold);
-  border-radius: 50%;
-  bottom: -1.5px; right: 25%;
-  box-shadow: 0 0 8px var(--gold);
-}
-
-@keyframes spin {
-  from { transform: translate(-50%, -50%) rotate(0deg); }
-  to   { transform: translate(-50%, -50%) rotate(360deg); }
-}
-
-.hero-eyebrow {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 200;
-  font-size: 0.62rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 2rem;
-  opacity: 0;
-  animation: fadeUp 1s ease 0.4s forwards;
-}
-
-.hero-sigil {
-  width: 52px; height: 52px;
-  margin: 0 auto 2.5rem;
-  opacity: 0;
-  animation: fadeUp 1s ease 0.6s forwards;
-}
-
-.hero-title {
-  font-family: 'Cinzel', serif;
-  font-weight: 300;
-  font-size: clamp(3.2rem, 8.5vw, 6rem);
-  line-height: 1;
-  letter-spacing: 0.06em;
-  color: var(--text);
-  margin-bottom: 1.25rem;
-  opacity: 0;
-  animation: fadeUp 1s ease 0.8s forwards;
-}
-
-.hero-title .pre {
-  display: block;
-  font-size: 0.38em;
-  letter-spacing: 0.35em;
-  color: var(--text-dim);
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 200;
-  margin-bottom: 0.5em;
-}
-
-.hero-sub {
-  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
-  color: var(--text-dim);
-  letter-spacing: 0.1em;
-  font-style: italic;
-  margin-bottom: 4rem;
-  opacity: 0;
-  animation: fadeUp 1s ease 1s forwards;
-}
-
-.scroll-cue {
-  position: absolute;
-  bottom: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  opacity: 0;
-  animation: fadeUp 1s ease 1.6s forwards;
-}
-
-.scroll-cue-line {
-  width: 1px; height: 44px;
-  background: linear-gradient(to bottom, rgba(168,127,212,0.5), transparent);
-  animation: pulse 2.5s ease infinite;
-}
-
-.scroll-cue-label {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.5rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-/* ====== DIVISOR ====== */
-.divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  padding: 2rem;
-}
-
-.div-line {
-  flex: 1;
-  max-width: 100px;
-  height: 1px;
-}
-
-.div-line.l { background: linear-gradient(to right, transparent, var(--border-mid)); }
-.div-line.r { background: linear-gradient(to left, transparent, var(--border-mid)); }
-.div-dot { color: var(--accent); font-size: 0.6rem; opacity: 0.6; }
-
-/* ====== MANIFESTO ====== */
-.manifesto {
-  max-width: 660px;
-  margin: 0 auto;
-  padding: 3rem 2rem 5rem;
-  background: transparent;
-}
-
-.section-tag {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 200;
-  font-size: 0.58rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--accent);
-  display: block;
-  margin-bottom: 2.5rem;
-  opacity: 0.7;
-}
-
-.manifesto p {
-  font-size: clamp(1.05rem, 2vw, 1.2rem);
-  line-height: 2;
-  color: var(--text-mid);
-  margin-bottom: 1.6rem;
-}
-
-.manifesto-highlight {
-  font-size: clamp(1.2rem, 2.5vw, 1.55rem) !important;
-  color: var(--text) !important;
-  line-height: 1.6 !important;
-  padding: 1.5rem 1.75rem;
-  margin: 2rem 0 !important;
-  border-left: 1.5px solid var(--accent);
-  background: linear-gradient(to right, rgba(168,127,212,0.06), transparent);
-  border-radius: 0 4px 4px 0;
-}
-
-.epigrafe {
-  font-size: 0.88rem !important;
-  color: var(--gold) !important;
-  text-align: right;
-  font-style: italic;
-  opacity: 0.55;
-  margin-top: 2.5rem !important;
-  letter-spacing: 0.04em;
-}
-
-/* ====== COMO FUNCIONA ====== */
-.como {
-  padding: 5rem 2rem;
-  position: relative;
-  background: #F2EFF8;
-  color: #1A1530;
-}
-
-.como .section-tag { color: #7B5EA7; }
-.como .section-title { color: #1A1530; }
-.como .como-item { background: #FFFFFF; transition: background 0.3s, box-shadow 0.3s; }
-.como .como-item:hover { background: #FAF8FF; box-shadow: 0 4px 24px rgba(120,80,200,0.08); }
-.como .como-item::before { background: linear-gradient(135deg, rgba(168,127,212,0.06), transparent); }
-.como .como-num { color: #C4B0E0; }
-.como .como-titulo { color: #1A1530; }
-.como .como-desc { color: #6B6080; }
-.como-grid { border-color: rgba(180,160,220,0.2); background: rgba(180,160,220,0.2); }
-
-.como-after-removed {}
-
-.como-inner { max-width: 720px; margin: 0 auto; }
-
-.section-title {
-  font-family: 'Cinzel', serif;
-  font-weight: 300;
-  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-  color: var(--text);
-  line-height: 1.25;
-  margin-bottom: 3rem;
-  letter-spacing: 0.03em;
-}
-
-.como-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: var(--border);
-}
-
-@media (max-width: 560px) {
-  .como-grid { grid-template-columns: 1fr; }
-}
-
-.como-item {
-  background: var(--void);
-  padding: 2rem 1.75rem;
-  position: relative;
-  overflow: hidden;
-  transition: background 0.4s;
-}
-
-.como-item::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--accent-glow), transparent);
-  opacity: 0;
-  transition: opacity 0.4s;
-}
-
-.como-item:hover { background: #110F1E; }
-.como-item:hover::before { opacity: 1; }
-
-.como-num {
-  font-family: 'Cinzel', serif;
-  font-size: 1.8rem;
-  color: var(--accent-dim);
-  line-height: 1;
-  margin-bottom: 1rem;
-  display: block;
-  position: relative;
-}
-
-.como-titulo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.15rem;
-  color: var(--text);
-  margin-bottom: 0.6rem;
-  display: block;
-  font-weight: 400;
-  position: relative;
-}
-
-.como-desc {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 300;
-  color: var(--text-dim);
-  line-height: 1.75;
-  position: relative;
-}
-
-/* ====== CADASTRO ====== */
-.cadastro {
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 5rem 2rem 7rem;
-  text-align: center;
-}
-
-.cadastro-wrap {
-  background: rgba(168, 127, 212, 0.04);
-  border: 1px solid var(--border);
-  border-radius: 2px;
-  padding: 3.5rem 2.5rem;
-  position: relative;
-}
-
-.cadastro-wrap::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 50%; transform: translateX(-50%);
-  width: 60px; height: 1px;
-  background: var(--accent);
-  opacity: 0.5;
-}
-
-.cadastro-titulo {
-  font-family: 'Cinzel', serif;
-  font-weight: 300;
-  font-size: clamp(1.7rem, 3.5vw, 2.4rem);
-  color: var(--text);
-  margin-bottom: 1rem;
-  letter-spacing: 0.04em;
-}
-
-.cadastro-intro {
-  font-size: 1rem;
-  color: var(--text-dim);
-  line-height: 1.85;
-  margin-bottom: 2.5rem;
-  font-style: italic;
-}
-
-.btn-primary {
-  display: inline-block;
-  padding: 0.9rem 2.75rem;
-  background: transparent;
-  border: 1px solid var(--border-bright);
-  color: var(--text);
-  text-decoration: none;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
-  transition: color 0.4s;
-  cursor: none;
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(168,127,212,0.25), rgba(100,70,180,0.15));
-  transform: translateX(-101%);
-  transition: transform 0.45s ease;
-}
-
-.btn-primary:hover::before { transform: translateX(0); }
-.btn-primary span { position: relative; z-index: 1; }
-
-.sep {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin: 2.5rem 0;
-}
-
-.sep-line {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-.sep-label {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.58rem;
-  letter-spacing: 0.2em;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
-.btn-whatsapp {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.75rem 1.75rem;
-  border: 1px solid rgba(100, 180, 120, 0.2);
-  color: rgba(140, 210, 160, 0.7);
-  text-decoration: none;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  transition: border-color 0.3s, color 0.3s, background 0.3s;
-  cursor: none;
-}
-
-.btn-whatsapp:hover {
-  border-color: rgba(100, 180, 120, 0.45);
-  color: rgba(170, 240, 190, 0.9);
-  background: rgba(50, 100, 60, 0.12);
-}
-
-/* ====== RODAPÉ ====== */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 2.5rem 2rem;
-  text-align: center;
-}
-
-.footer-nome {
-  font-family: 'Cinzel', serif;
-  font-weight: 300;
-  font-size: 0.82rem;
-  color: var(--text-dim);
-  letter-spacing: 0.18em;
-}
-
-.footer-sub {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.62rem;
-  font-weight: 300;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--text-mid);
-  opacity: 0.6;
-  margin-top: 0.5rem;
-}
-
-/* ====== ANIMAÇÕES ====== */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.9s ease, transform 0.9s ease;
-}
-.reveal.visible { opacity: 1; transform: none; }
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 
+<!-- FUNDO -->
 <canvas id="starfield"></canvas>
 <div class="nebula-bg"></div>
 
-<div class="wrapper">
+<!-- ============================================================
+     TELA DE LOGIN
+     ============================================================ -->
+<div id="login-screen">
+  <div class="login-box">
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="orbit orbit-1"></div>
-    <div class="orbit orbit-2"></div>
-
-    <p class="hero-eyebrow">Um convite ao desconhecido</p>
-
-    <h1 class="hero-title">
-      <span class="pre">Clube do</span>
-      Limiar
-    </h1>
-    <p class="hero-sub">investigação simbólica da vida interior</p>
-
-    <div class="scroll-cue">
-      <div class="scroll-cue-line"></div>
-      <span class="scroll-cue-label">descer</span>
+    <!-- Órbita -->
+    <div class="login-orbit">
+      <div class="login-orbit-1"></div>
+      <div class="login-orbit-2"></div>
     </div>
-  </section>
 
-  <!-- DIVISOR -->
-  <div class="divider reveal">
-    <div class="div-line l"></div>
-    <span class="div-dot">✦</span>
-    <div class="div-line r"></div>
+    <h1 class="login-title">Clube do Limiar</h1>
+    <p class="login-sub">área de membros</p>
+
+    <form class="login-form" id="login-form" autocomplete="off">
+      <input
+        class="login-input"
+        type="password"
+        id="senha-input"
+        placeholder="senha de acesso"
+        autocomplete="current-password"
+        spellcheck="false"
+      >
+      <button type="submit" class="login-btn">Entrar</button>
+      <p class="login-error" id="login-error" aria-live="polite"></p>
+    </form>
+
   </div>
-
-  <!-- MANIFESTO -->
-  <section class="manifesto">
-    <span class="section-tag reveal">Manifesto</span>
-
-    <p class="reveal">Existe uma parte de você que nunca dorme, nunca para, nunca esquece. Ela fala em sonhos, age nos seus padrões, escreve os seus medos mais antigos. Você a chama de instinto, de intuição, de pressentimento. Nós a chamamos de inconsciente.</p>
-
-    <p class="reveal">A maioria das pessoas passa a vida inteira sem investigá-la. Não por falta de curiosidade — mas porque ninguém criou um espaço para isso.</p>
-
-    <div class="manifesto-highlight reveal">O Clube do Limiar existe para ser esse espaço.</div>
-
-    <p class="reveal">Não somos terapia. Não somos curso. Não somos religião. Somos um círculo de investigação — um lugar onde símbolos, sonhos, arquétipos e mitos são levados a sério como linguagens mais antigas que a palavra. Onde a vida interior tem o mesmo peso que a exterior.</p>
-
-    <p class="reveal">Acreditamos que o autoconhecimento não acontece apenas no divã ou na meditação. Acontece também num filme assistido com atenção, num sonho anotado de madrugada, num símbolo que aparece de novo e de novo sem que você saiba por quê.</p>
-
-    <p class="reveal">Nos reunimos para atravessar esse limiar juntos. Sem pressa de concluir, sem medo de aprofundar. Com Jung e com cinema. Com neurociência e com mitologia. Com o que vier — desde que venha do fundo.</p>
-
-    <p class="epigrafe reveal">Conhece-te a ti mesmo. — Oráculo de Delfos</p>
-  </section>
-
-  <!-- DIVISOR -->
-  <div class="divider reveal">
-    <div class="div-line l"></div>
-    <span class="div-dot">⬡</span>
-    <div class="div-line r"></div>
-  </div>
-
-  <!-- COMO FUNCIONA -->
-  <section class="como">
-    <div class="como-inner">
-      <span class="section-tag reveal">Como funciona</span>
-      <h2 class="section-title reveal">Um encontro por mês.<br>Uma vida por dentro.</h2>
-
-      <div class="como-grid">
-        <div class="como-item reveal">
-          <span class="como-num">01</span>
-          <span class="como-titulo">Tema mensal</span>
-          <p class="como-desc">Cada mês tem um tema, uma curadoria de livros e filmes, e atividades para fazer em casa no seu tempo.</p>
-        </div>
-        <div class="como-item reveal">
-          <span class="como-num">02</span>
-          <span class="como-titulo">Encontro presencial</span>
-          <p class="como-desc">Uma vez por mês nos reunimos para debater, compartilhar e aprofundar o que cada um viveu com o tema.</p>
-        </div>
-        <div class="como-item reveal">
-          <span class="como-num">03</span>
-          <span class="como-titulo">Círculo pequeno</span>
-          <p class="como-desc">Máximo de 15 pessoas. O tamanho é intencional — intimidade e profundidade não cabem em multidões.</p>
-        </div>
-        <div class="como-item reveal">
-          <span class="como-num">04</span>
-          <span class="como-titulo">Sem hierarquia</span>
-          <p class="como-desc">Não há guru nem respostas certas. Há uma facilitadora e um círculo de pessoas curiosas.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DIVISOR -->
-  <div class="divider reveal">
-    <div class="div-line l"></div>
-    <span class="div-dot">✦</span>
-    <div class="div-line r"></div>
-  </div>
-
-  <!-- CADASTRO -->
-  <section class="cadastro">
-    <div class="cadastro-wrap">
-    <span class="section-tag reveal" style="display:block;">Quero participar</span>
-    <h2 class="cadastro-titulo reveal">Atravesse o Limiar</h2>
-    <p class="cadastro-intro reveal">As vagas são limitadas e o ingresso é por convite ou cadastro. Preencha o formulário — e depois entre no grupo do clube.</p>
-
-    <a class="btn-primary reveal" href="https://form.respondi.app/HTJEQr8q" target="_blank">
-      <span>Preencher o cadastro</span>
-    </a>
-    </div>
-  </section>
-
-  <!-- RODAPÉ -->
-  <footer>
-    <p class="footer-nome">Clube do Limiar</p>
-    <p class="footer-sub">investigação simbólica da vida interior</p>
-  </footer>
-
 </div>
 
-<script>
-// CURSOR
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx = 0, my = 0, rx = 0, ry = 0;
+<!-- ============================================================
+     APLICAÇÃO — visível após login
+     ============================================================ -->
+<div id="app">
 
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx + 'px';
-  cursor.style.top = my + 'px';
-});
+  <!-- NAV TOGGLE MOBILE -->
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 
-(function animRing() {
-  rx += (mx - rx) * 0.1;
-  ry += (my - ry) * 0.1;
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
-  requestAnimationFrame(animRing);
-})();
+  <!-- NAVEGAÇÃO LATERAL -->
+  <nav class="nav" id="nav" role="navigation">
+    <div class="nav-header">
+      <span class="nav-logo">Clube do Limiar</span>
+      <span class="nav-logo-sub">investigação simbólica</span>
+    </div>
 
-document.querySelectorAll('a, button').forEach(el => {
-  el.addEventListener('mouseenter', () => {
-    cursor.style.width = '10px'; cursor.style.height = '10px';
-    ring.style.width = '44px'; ring.style.height = '44px';
-  });
-  el.addEventListener('mouseleave', () => {
-    cursor.style.width = '5px'; cursor.style.height = '5px';
-    ring.style.width = '26px'; ring.style.height = '26px';
-  });
-});
+    <div class="nav-links">
+      <a href="#" class="nav-link" data-section="inicio">
+        <svg class="nav-icon" viewBox="0 0 14 14" fill="none">
+          <path d="M7 1L13 6V13H9V9H5V13H1V6L7 1Z" stroke="currentColor" stroke-width="0.9"/>
+        </svg>
+        Início
+      </a>
+      <a href="#" class="nav-link" data-section="mes">
+        <svg class="nav-icon" viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="0.9"/>
+          <path d="M7 3V7L10 9" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+        </svg>
+        Mês atual
+      </a>
+      <a href="#" class="nav-link" data-section="arquivo">
+        <svg class="nav-icon" viewBox="0 0 14 14" fill="none">
+          <rect x="1" y="3" width="12" height="9" rx="0.5" stroke="currentColor" stroke-width="0.9"/>
+          <path d="M1 6H13" stroke="currentColor" stroke-width="0.9"/>
+          <path d="M5 1V3M9 1V3" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+        </svg>
+        Arquivo
+      </a>
+      <a href="#" class="nav-link" data-section="agenda">
+        <svg class="nav-icon" viewBox="0 0 14 14" fill="none">
+          <path d="M2 5H12M4 1V3M10 1V3M2 3H12V12H2V3Z" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+        </svg>
+        Agenda
+      </a>
+      <a href="#" class="nav-link" data-section="membros">
+        <svg class="nav-icon" viewBox="0 0 14 14" fill="none">
+          <circle cx="5" cy="4.5" r="2.5" stroke="currentColor" stroke-width="0.9"/>
+          <path d="M1 12C1 9.8 2.8 8 5 8s4 1.8 4 4" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+          <circle cx="10" cy="5" r="2" stroke="currentColor" stroke-width="0.9"/>
+          <path d="M12 12C12 10.3 11.1 9 10 8.5" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+        </svg>
+        Membros
+      </a>
+    </div>
 
-// CONSTELAÇÕES
-const canvas = document.getElementById('starfield');
-const ctx = canvas.getContext('2d');
-let W, H;
+    <div class="nav-footer">
+      <button class="nav-sair" id="btn-sair">Sair</button>
+    </div>
+  </nav>
 
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', () => { resize(); initNodes(); });
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="main">
 
-// Nós da constelação — distribuídos pela tela
-let nodes = [];
-const CONNECT_DIST = 180;
-const MOUSE_ATTRACT = 120;
+    <!-- ====== INÍCIO ====== -->
+    <section class="section" id="section-inicio">
+      <span class="section-eyebrow">Bem-vinda ao círculo</span>
+      <h1 class="section-title">Início</h1>
 
-function initNodes() {
-  const count = Math.floor((W * H) / 18000);
-  nodes = Array.from({ length: Math.max(count, 18) }, () => ({
-    x: Math.random() * W,
-    y: Math.random() * H,
-    r: Math.random() * 1.1 + 0.4,
-    baseO: Math.random() * 0.5 + 0.15,
-    vx: (Math.random() - 0.5) * 0.18,
-    vy: (Math.random() - 0.5) * 0.18,
-    phase: Math.random() * Math.PI * 2,
-    speed: Math.random() * 0.002 + 0.0006,
-    // alguns nós são "estrelas âncora" — maiores, com brilho especial
-    anchor: Math.random() < 0.18,
-    hue: Math.random() > 0.65 ? '168,127,212' : '220,210,240'
-  }));
-}
-initNodes();
+      <div class="inicio-grid">
+        <div class="card" id="inicio-encontro">
+          <!-- preenchido pelo app.js -->
+        </div>
+        <div class="card" id="inicio-mes">
+          <!-- preenchido pelo app.js -->
+        </div>
+      </div>
 
-// Constelações fixas — grupos de nós conectados permanentemente
-// Surgem gradualmente ao carregar
-const CONSTELLATIONS = [
-  // Triângulo superior esquerdo
-  [0, 3, 7],
-  // Quadrado central
-  [5, 9, 14, 11],
-  // Linha diagonal
-  [2, 6, 10],
-  // Cruz
-  [1, 4, 8, 12]
-];
+      <div class="inner-divider">
+        <div class="inner-divider-line"></div>
+        <span class="inner-divider-dot">✦</span>
+        <div class="inner-divider-line"></div>
+      </div>
 
-let constellationProgress = 0; // 0→1, controla o surgimento das linhas fixas
-let startTime = null;
-const REVEAL_DURATION = 3200; // ms para constelações aparecerem
+      <span class="section-eyebrow">Semente da semana</span>
+      <div class="semente-box" id="inicio-semente">
+        <!-- preenchido pelo app.js -->
+      </div>
+    </section>
 
-function draw(ts) {
-  if (!startTime) startTime = ts;
-  const elapsed = ts - startTime;
-  constellationProgress = Math.min(elapsed / REVEAL_DURATION, 1);
-  // Easing suave
-  const eased = 1 - Math.pow(1 - constellationProgress, 3);
+    <!-- ====== MÊS ATUAL ====== -->
+    <section class="section" id="section-mes">
+      <span class="section-eyebrow" id="mes-num">Mês 01</span>
+      <h1 class="section-title" id="mes-titulo"></h1>
+      <p class="section-sub" id="mes-sub"></p>
 
-  ctx.clearRect(0, 0, W, H);
+      <!-- Pergunta germinativa -->
+      <div class="pergunta-box" id="mes-pergunta">
+        <span class="pergunta-label">Pergunta germinativa</span>
+        <p class="pergunta-texto"></p>
+      </div>
 
-  // Mover nós
-  nodes.forEach(n => {
-    n.x += n.vx;
-    n.y += n.vy;
-    // Bounce nas bordas
-    if (n.x < 0 || n.x > W) n.vx *= -1;
-    if (n.y < 0 || n.y > H) n.vy *= -1;
-    n.x = Math.max(0, Math.min(W, n.x));
-    n.y = Math.max(0, Math.min(H, n.y));
-  });
+      <!-- Símbolo -->
+      <div class="inner-divider">
+        <div class="inner-divider-line"></div>
+        <span class="inner-divider-dot">◯</span>
+        <div class="inner-divider-line"></div>
+      </div>
+      <span class="tag">Símbolo do mês</span>
+      <div class="simbolo-row" id="mes-simbolo">
+        <!-- preenchido pelo app.js -->
+      </div>
 
-  // Linhas dinâmicas entre nós próximos — reagem ao mouse
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = i + 1; j < nodes.length; j++) {
-      const a = nodes[i], b = nodes[j];
-      const dx = a.x - b.x, dy = a.y - b.y;
-      const dist = Math.sqrt(dx*dx + dy*dy);
+      <!-- Curadoria -->
+      <div class="inner-divider">
+        <div class="inner-divider-line"></div>
+        <span class="inner-divider-dot">✦</span>
+        <div class="inner-divider-line"></div>
+      </div>
+      <span class="tag">Curadoria</span>
+      <div class="curadoria-list" id="mes-curadoria">
+        <!-- preenchido pelo app.js -->
+      </div>
 
-      if (dist < CONNECT_DIST) {
-        // Distância ao mouse influencia opacidade
-        const mdxa = a.x - mx, mdya = a.y - my;
-        const mdxb = b.x - mx, mdyb = b.y - my;
-        const mda = Math.sqrt(mdxa*mdxa + mdya*mdya);
-        const mdb = Math.sqrt(mdxb*mdxb + mdyb*mdyb);
-        const mouseBoost = (mda < MOUSE_ATTRACT || mdb < MOUSE_ATTRACT) ? 0.5 : 0;
+      <!-- Atividades -->
+      <div class="inner-divider">
+        <div class="inner-divider-line"></div>
+        <span class="inner-divider-dot">✦</span>
+        <div class="inner-divider-line"></div>
+      </div>
+      <span class="tag">Atividades para casa</span>
+      <div class="atividades-list" id="mes-atividades">
+        <!-- preenchido pelo app.js -->
+      </div>
 
-        const baseO = (1 - dist / CONNECT_DIST) * 0.05 + mouseBoost * 0.18;
-        const o = Math.min(baseO, 0.22);
+      <!-- Roteiro do encontro -->
+      <div class="inner-divider">
+        <div class="inner-divider-line"></div>
+        <span class="inner-divider-dot">✦</span>
+        <div class="inner-divider-line"></div>
+      </div>
+      <button class="roteiro-toggle" id="roteiro-toggle">
+        <span>Roteiro do encontro</span>
+        <span class="roteiro-toggle-arrow">↓</span>
+      </button>
+      <div class="roteiro-content" id="roteiro-content">
+        <!-- preenchido pelo app.js -->
+      </div>
+    </section>
 
-        ctx.beginPath();
-        ctx.moveTo(a.x, a.y);
-        ctx.lineTo(b.x, b.y);
-        ctx.strokeStyle = `rgba(168, 127, 212, ${o})`;
-        ctx.lineWidth = 0.4;
-        ctx.stroke();
-      }
-    }
-  }
+    <!-- ====== ARQUIVO ====== -->
+    <section class="section" id="section-arquivo">
+      <span class="section-eyebrow">Ciclos anteriores</span>
+      <h1 class="section-title">Arquivo</h1>
+      <p class="section-sub">Cada mês concluído vive aqui.</p>
 
-  // Linhas de constelação fixas — surgem suavemente
-  CONSTELLATIONS.forEach((group, gi) => {
-    const groupDelay = gi / CONSTELLATIONS.length;
-    const groupProgress = Math.max(0, Math.min(1, (eased - groupDelay * 0.5) / 0.6));
+      <div class="arquivo-grid" id="arquivo-grid">
+        <!-- preenchido pelo app.js -->
+      </div>
+    </section>
 
-    for (let k = 0; k < group.length - 1; k++) {
-      const ni = group[k] % nodes.length;
-      const nj = group[k + 1] % nodes.length;
-      const a = nodes[ni], b = nodes[nj];
+    <!-- ====== AGENDA ====== -->
+    <section class="section" id="section-agenda">
+      <span class="section-eyebrow">Datas do clube</span>
+      <h1 class="section-title">Agenda</h1>
+      <p class="section-sub">Um encontro por mês. Uma vida por dentro.</p>
 
-      // A linha "se desenha" progressivamente
-      const lineProgress = Math.max(0, Math.min(1, (groupProgress - k * 0.15) / 0.6));
-      if (lineProgress <= 0) continue;
+      <div class="agenda-list" id="agenda-list">
+        <!-- preenchido pelo app.js -->
+      </div>
 
-      const endX = a.x + (b.x - a.x) * lineProgress;
-      const endY = a.y + (b.y - a.y) * lineProgress;
+      <div class="agenda-cal-wrap">
+        <a id="agenda-cal-btn" href="#" target="_blank" rel="noopener" class="btn-gcal" style="display:none;">
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><rect x="0.5" y="1.5" width="12" height="11" rx="0.5" stroke="currentColor" stroke-width="0.9"/><path d="M0.5 5.5H12.5M4 0.5V3M9 0.5V3" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/><path d="M4 8L6 10L9.5 7" stroke="currentColor" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>Adicionar ao meu Google Calendar</span>
+        </a>
+      </div>
+    </section>
 
-      ctx.beginPath();
-      ctx.moveTo(a.x, a.y);
-      ctx.lineTo(endX, endY);
-      ctx.strokeStyle = `rgba(200, 170, 240, ${0.18 * lineProgress})`;
-      ctx.lineWidth = 0.8;
-      ctx.stroke();
-    }
-  });
+    <!-- ====== MEMBROS ====== -->
+    <section class="section" id="section-membros">
+      <span class="section-eyebrow">O círculo</span>
+      <h1 class="section-title">Membros</h1>
+      <p class="section-sub">Máximo de 15 pessoas. O tamanho é intencional.</p>
 
-  // Desenhar nós
-  nodes.forEach((n, i) => {
-    const t = ts * n.speed + n.phase;
-    const o = n.baseO * (0.55 + 0.45 * Math.sin(t));
+      <div class="membros-grid" id="membros-grid">
+        <!-- preenchido pelo app.js -->
+      </div>
+    </section>
 
-    // Proximidade do mouse aumenta brilho
-    const mdx = n.x - mx, mdy = n.y - my;
-    const md = Math.sqrt(mdx*mdx + mdy*mdy);
-    const mouseO = md < MOUSE_ATTRACT ? (1 - md / MOUSE_ATTRACT) * 0.35 : 0;
-    const finalO = Math.min(o + mouseO, 0.65);
+  </main>
+</div>
 
-    if (n.anchor) {
-      // Estrela âncora — maior, com halo
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r * 2, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${n.hue}, ${finalO})`;
-      ctx.shadowBlur = 7;
-      ctx.shadowColor = `rgba(168,127,212,0.3)`;
-      ctx.fill();
-      ctx.shadowBlur = 0;
+<!-- Modal do arquivo -->
+<div class="modal-overlay" id="modal-overlay" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close">✕ fechar</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
 
-      // Ponto central brilhante
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r * 0.7, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(240,235,255,${finalO * 0.8})`;
-      ctx.fill();
-    } else {
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${n.hue}, ${finalO * 0.7})`;
-      ctx.fill();
-    }
-  });
+<!-- Scripts -->
+<script src="data.js"></script>
+<script src="constellation.js"></script>
+<script src="app.js"></script>
 
-  requestAnimationFrame(draw);
-}
-requestAnimationFrame(draw);
-
-// OPACIDADE DINÂMICA DO CANVAS — reduz sobre o manifesto
-const manifestoEl = document.querySelector('.manifesto');
-
-function updateCanvasOpacity() {
-  if (!manifestoEl) return;
-  const rect = manifestoEl.getBoundingClientRect();
-  const winH = window.innerHeight;
-
-  // Começa a reduzir quando o manifesto entra na tela, restaura quando sai
-  const start = winH * 0.8;
-  const end = winH * 0.1;
-
-  if (rect.top > start) {
-    // Acima do manifesto — opacidade normal
-    canvas.style.opacity = '0.7';
-  } else if (rect.bottom < 0) {
-    // Abaixo do manifesto — opacidade normal
-    canvas.style.opacity = '0.7';
-  } else {
-    // Dentro da zona do manifesto — reduz gradualmente
-    const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
-    const eased = progress < 0.5 ? 2 * progress * progress : 1 - Math.pow(-2 * progress + 2, 2) / 2;
-    const opacity = 0.7 - eased * 0.58; // reduz de 0.7 até 0.12
-    canvas.style.opacity = opacity.toFixed(3);
-  }
-}
-
-window.addEventListener('scroll', updateCanvasOpacity, { passive: true });
-updateCanvasOpacity();
-const reveals = document.querySelectorAll('.reveal');
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('visible'), i * 90);
-      obs.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.08 });
-reveals.forEach(el => obs.observe(el));
-</script>
 </body>
 </html>
