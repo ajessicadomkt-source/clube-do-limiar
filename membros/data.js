@@ -29,7 +29,7 @@ const CONFIG = {
 // "data" no formato: "07 de maio de 2026"
 // ------------------------------------------------------------
 const SEMENTE_SEMANA = {
-  data: "07 de maio de 2026",
+  data: "08 de maio de 2026",
   texto:
     "O símbolo não explica — ele convida. Antes de nomear o que você sentiu, pergunte: que imagem veio primeiro?",
   autor: "Jessica",
