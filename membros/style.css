@@ -19,6 +19,15 @@
   --border: rgba(168, 127, 212, 0.12);
   --border-mid: rgba(168, 127, 212, 0.25);
   --border-bright: rgba(168, 127, 212, 0.45);
+  /* Paleta clara — mesma lógica da seção "Como funciona" da página pública */
+  --light-bg: #F2EFF8;
+  --light-card: #FFFFFF;
+  --light-text: #1A1530;
+  --light-text-mid: #4A3F6B;
+  --light-text-dim: #6B6080;
+  --light-accent: #7B5EA7;
+  --light-gold: #9A7B40;
+  --light-border: rgba(180, 160, 220, 0.25);
   --nav-width: 220px;
   --nav-width-collapsed: 60px;
 }
@@ -401,30 +410,30 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
-  background: var(--border);
+  background: var(--light-border);
   margin-bottom: 2.5rem;
 }
 
 @media (max-width: 640px) { .inicio-grid { grid-template-columns: 1fr; } }
 
 .card {
-  background: var(--void);
+  background: var(--light-card);
   padding: 1.75rem;
   position: relative;
   overflow: hidden;
-  transition: background 0.35s;
+  transition: background 0.35s, box-shadow 0.35s;
 }
 
 .card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--accent-glow), transparent);
+  background: linear-gradient(135deg, rgba(168,127,212,0.06), transparent);
   opacity: 0;
   transition: opacity 0.35s;
 }
 
-.card:hover { background: #110F1E; }
+.card:hover { background: #FAF8FF; box-shadow: 0 4px 24px rgba(120,80,200,0.07); }
 .card:hover::before { opacity: 1; }
 
 .card-tag {
@@ -433,7 +442,7 @@ body {
   font-weight: 200;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--light-accent);
   display: block;
   margin-bottom: 0.6rem;
   position: relative;
@@ -443,14 +452,14 @@ body {
   font-family: 'Cinzel', serif;
   font-weight: 300;
   font-size: 1.1rem;
-  color: var(--text);
+  color: var(--light-text);
   margin-bottom: 0.4rem;
   position: relative;
 }
 
 .card-body {
   font-size: 0.88rem;
-  color: var(--text-mid);
+  color: var(--light-text-mid);
   line-height: 1.8;
   position: relative;
 }
@@ -458,7 +467,7 @@ body {
 .card-detail {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.68rem;
-  color: var(--text-dim);
+  color: var(--light-text-dim);
   letter-spacing: 0.08em;
   margin-top: 0.75rem;
   position: relative;
@@ -466,8 +475,8 @@ body {
 
 /* Semente da semana */
 .semente-box {
-  border: 1px solid var(--border-mid);
-  background: rgba(168,127,212,0.04);
+  border: 1px solid var(--light-border);
+  background: var(--light-bg);
   padding: 2rem 2rem 1.75rem;
   position: relative;
 }
@@ -477,14 +486,14 @@ body {
   position: absolute;
   top: 0; left: 2rem;
   width: 40px; height: 1px;
-  background: var(--accent);
-  opacity: 0.45;
+  background: var(--light-accent);
+  opacity: 0.5;
 }
 
 .semente-texto {
   font-size: clamp(1.05rem, 2vw, 1.2rem);
   line-height: 2;
-  color: var(--text-mid);
+  color: var(--light-text-mid);
   font-style: italic;
   margin-bottom: 1rem;
 }
@@ -494,7 +503,7 @@ body {
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-dim);
+  color: var(--light-text-dim);
 }
 
 /* ============================================================
@@ -565,27 +574,27 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1px;
-  background: var(--border);
+  background: var(--light-border);
   margin-bottom: 2.5rem;
 }
 
 .curadoria-item {
-  background: var(--void);
+  background: var(--light-card);
   padding: 1.5rem 1.75rem;
   position: relative;
   overflow: hidden;
-  transition: background 0.3s;
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
-.curadoria-item:hover { background: #0E0C1B; }
+.curadoria-item:hover { background: #FAF8FF; box-shadow: 0 4px 20px rgba(120,80,200,0.06); }
 
 .curadoria-tipo {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.52rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--gold);
-  opacity: 0.65;
+  color: var(--light-gold);
+  opacity: 0.85;
   display: inline-block;
   margin-bottom: 0.35rem;
 }
@@ -594,7 +603,7 @@ body {
   font-family: 'Cinzel', serif;
   font-weight: 300;
   font-size: 1rem;
-  color: var(--text);
+  color: var(--light-text);
   display: block;
   margin-bottom: 0.2rem;
 }
@@ -602,22 +611,22 @@ body {
 .curadoria-autor {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.7rem;
-  color: var(--text-dim);
+  color: var(--light-text-dim);
   display: block;
   margin-bottom: 0.6rem;
 }
 
 .curadoria-desc {
   font-size: 0.9rem;
-  color: var(--text-mid);
+  color: var(--light-text-mid);
   line-height: 1.8;
 }
 
 .curadoria-indicacao {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.7rem;
-  color: var(--accent);
-  opacity: 0.7;
+  color: var(--light-accent);
+  opacity: 0.85;
   margin-top: 0.5rem;
   font-style: italic;
 }
@@ -626,7 +635,8 @@ body {
 .atividades-list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1px;
+  background: var(--light-border);
   margin-bottom: 2.5rem;
 }
 
@@ -634,12 +644,17 @@ body {
   display: flex;
   gap: 1.25rem;
   align-items: flex-start;
+  background: var(--light-bg);
+  padding: 1.5rem 1.75rem;
+  transition: background 0.3s;
 }
+
+.atividade-item:hover { background: #FAF8FF; }
 
 .atividade-num {
   font-family: 'Cinzel', serif;
   font-size: 1.5rem;
-  color: var(--accent-dim);
+  color: #C4B0E0;
   line-height: 1;
   flex-shrink: 0;
   padding-top: 0.1rem;
@@ -650,14 +665,14 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
   font-size: 1.05rem;
-  color: var(--text);
+  color: var(--light-text);
   display: block;
   margin-bottom: 0.35rem;
 }
 
 .atividade-desc {
   font-size: 0.88rem;
-  color: var(--text-dim);
+  color: var(--light-text-mid);
   line-height: 1.8;
 }
 
@@ -740,34 +755,34 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1px;
-  background: var(--border);
+  background: var(--light-border);
 }
 
 .arquivo-card {
-  background: var(--void);
+  background: var(--light-card);
   padding: 2rem 1.75rem;
   cursor: none;
   position: relative;
   overflow: hidden;
-  transition: background 0.3s;
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .arquivo-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--accent-glow), transparent);
+  background: linear-gradient(135deg, rgba(168,127,212,0.06), transparent);
   opacity: 0;
   transition: opacity 0.3s;
 }
 
-.arquivo-card:hover { background: #110F1E; }
+.arquivo-card:hover { background: #FAF8FF; box-shadow: 0 4px 24px rgba(120,80,200,0.08); }
 .arquivo-card:hover::before { opacity: 1; }
 
 .arquivo-num {
   font-family: 'Cinzel', serif;
   font-size: 1.6rem;
-  color: var(--accent-dim);
+  color: #C4B0E0;
   line-height: 1;
   margin-bottom: 0.75rem;
   display: block;
@@ -778,7 +793,7 @@ body {
   font-family: 'Cinzel', serif;
   font-weight: 300;
   font-size: 1.05rem;
-  color: var(--text);
+  color: var(--light-text);
   display: block;
   margin-bottom: 0.3rem;
   position: relative;
@@ -786,7 +801,7 @@ body {
 
 .arquivo-subtema {
   font-size: 0.82rem;
-  color: var(--text-dim);
+  color: var(--light-text-dim);
   font-style: italic;
   position: relative;
 }
@@ -796,8 +811,8 @@ body {
   font-size: 0.6rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-dim);
-  opacity: 0.6;
+  color: var(--light-text-dim);
+  opacity: 0.7;
   margin-top: 0.75rem;
   display: block;
   position: relative;
@@ -862,11 +877,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1px;
-  background: var(--border);
+  background: var(--light-border);
 }
 
 .agenda-item {
-  background: var(--void);
+  background: var(--light-bg);
   padding: 1.5rem 1.75rem;
   display: flex;
   gap: 1.75rem;
@@ -874,32 +889,32 @@ body {
   transition: background 0.3s;
 }
 
-.agenda-item:hover { background: #0E0C1B; }
+.agenda-item:hover { background: #FAF8FF; }
 
 .agenda-item.proximo {
-  background: rgba(168,127,212,0.06);
-  border-left: 2px solid var(--accent);
+  background: #EDE8F8;
+  border-left: 2px solid var(--light-accent);
 }
 
-.agenda-item.proximo:hover { background: rgba(168,127,212,0.1); }
+.agenda-item.proximo:hover { background: #E8E0F5; }
 
 .agenda-num {
   font-family: 'Cinzel', serif;
   font-size: 1.2rem;
-  color: var(--accent-dim);
+  color: #C4B0E0;
   flex-shrink: 0;
   line-height: 1;
   padding-top: 0.2rem;
   min-width: 2.2rem;
 }
 
-.agenda-item.proximo .agenda-num { color: var(--accent); }
+.agenda-item.proximo .agenda-num { color: var(--light-accent); }
 
 .agenda-tema {
   font-family: 'Cinzel', serif;
   font-weight: 300;
   font-size: 1rem;
-  color: var(--text);
+  color: var(--light-text);
   display: block;
   margin-bottom: 0.35rem;
 }
@@ -907,7 +922,7 @@ body {
 .agenda-detalhe {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.7rem;
-  color: var(--text-dim);
+  color: var(--light-text-dim);
   line-height: 1.9;
   letter-spacing: 0.04em;
 }
@@ -917,16 +932,16 @@ body {
   font-size: 0.52rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--accent);
-  background: rgba(168,127,212,0.12);
+  color: var(--light-accent);
+  background: rgba(123,94,167,0.12);
   padding: 0.2rem 0.6rem;
   display: inline-block;
   margin-bottom: 0.5rem;
 }
 
 .agenda-a-confirmar {
-  color: var(--text-dim);
-  opacity: 0.5;
+  color: var(--light-text-dim);
+  opacity: 0.6;
   font-style: italic;
 }
 
@@ -937,32 +952,32 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1px;
-  background: var(--border);
+  background: var(--light-border);
 }
 
 .membro-card {
-  background: var(--void);
+  background: var(--light-card);
   padding: 1.75rem;
   position: relative;
   overflow: hidden;
-  transition: background 0.3s;
+  transition: background 0.3s, box-shadow 0.3s;
 }
 
 .membro-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--accent-glow), transparent);
+  background: linear-gradient(135deg, rgba(168,127,212,0.05), transparent);
   opacity: 0;
   transition: opacity 0.3s;
 }
 
-.membro-card:hover { background: #110F1E; }
+.membro-card:hover { background: #FAF8FF; box-shadow: 0 4px 20px rgba(120,80,200,0.07); }
 .membro-card:hover::before { opacity: 1; }
 
 .membro-inicial {
   width: 38px; height: 38px;
-  border: 1px solid var(--border-mid);
+  border: 1px solid rgba(123,94,167,0.3);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -970,7 +985,7 @@ body {
   font-family: 'Cinzel', serif;
   font-weight: 300;
   font-size: 1rem;
-  color: var(--accent);
+  color: var(--light-accent);
   margin-bottom: 1rem;
   position: relative;
 }
@@ -979,7 +994,7 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-weight: 400;
   font-size: 1.05rem;
-  color: var(--text);
+  color: var(--light-text);
   display: block;
   margin-bottom: 0.4rem;
   position: relative;
@@ -987,7 +1002,7 @@ body {
 
 .membro-frase {
   font-size: 0.82rem;
-  color: var(--text-dim);
+  color: var(--light-text-dim);
   line-height: 1.7;
   font-style: italic;
   position: relative;
@@ -1008,8 +1023,8 @@ body {
   text-transform: uppercase;
   color: var(--accent);
   display: block;
-  margin-bottom: 2rem;
-  opacity: 0.7;
+  margin-bottom: 1rem;
+  opacity: 0.8;
 }
 
 /* ============================================================
