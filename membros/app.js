@@ -169,8 +169,7 @@
     if (encontroEl && proximo) {
       encontroEl.innerHTML = `
         <span class="card-tag">Próximo encontro</span>
-        <h3 class="card-title">${proximo.tema}</h3>
-        <p class="card-body">${proximo.diaSemana}, ${proximo.data} · ${proximo.horario}</p>
+        <p class="card-body">${proximo.data}</p>
         <p class="card-detail">${proximo.local}</p>
       `;
     }
@@ -223,10 +222,12 @@
       `;
     }
 
-    // Curadoria
+    // Curadoria + Atividades (agregadas numa única seção)
     const curEl = document.getElementById("mes-curadoria");
     if (curEl) {
       curEl.innerHTML = "";
+
+      // Itens de curadoria
       MES_ATUAL.curadoria.forEach((item) => {
         const div = el("div", "curadoria-item");
         div.innerHTML = `
@@ -238,24 +239,23 @@
         `;
         curEl.appendChild(div);
       });
-    }
 
-    // Atividades
-    const atEl = document.getElementById("mes-atividades");
-    if (atEl) {
-      atEl.innerHTML = "";
-      MES_ATUAL.atividades.forEach((a, i) => {
-        const div = el("div", "atividade-item");
+      // Atividades para casa — aparecem na sequência, sem seção separada
+      MES_ATUAL.atividades.forEach((a) => {
+        const div = el("div", "curadoria-item");
         div.innerHTML = `
-          <span class="atividade-num">0${i + 1}</span>
-          <div>
-            <span class="atividade-titulo">${a.titulo}</span>
-            <p class="atividade-desc">${a.descricao}</p>
-          </div>
+          <span class="curadoria-tipo">atividade</span>
+          <span class="curadoria-titulo">${a.titulo}</span>
+          <span class="curadoria-autor"></span>
+          <p class="curadoria-desc">${a.descricao}</p>
         `;
-        atEl.appendChild(div);
+        curEl.appendChild(div);
       });
     }
+
+    // Atividades — seção separada desativada (agregada à curadoria acima)
+    const atEl = document.getElementById("mes-atividades");
+    if (atEl) atEl.innerHTML = "";
 
     // Roteiro
     const roteiroContent = document.getElementById("roteiro-content");

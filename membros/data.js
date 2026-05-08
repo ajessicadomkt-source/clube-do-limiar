@@ -101,7 +101,7 @@ const MES_ATUAL = {
     },
     {
       tempo: "1:20",
-      momento: "Cerâmica Viva — A porta que você quer abrir",
+      momento: "Experiência do Mês — Cerâmica Fria: A porta que você quer abrir",
       descricao: "",
     },
     {
@@ -147,11 +147,11 @@ const AGENDA = [
   {
     numero: "01",
     tema: "Como viemos parar aqui?",
-    data: "17 de maio de 2026",
-    diaSemana: "Domingo",
-    horario: "15h",
-    local: "Casa da Jessica — Av. das Araucárias, 210",
-    confirmado: true,
+    data: "em breve mais informações",
+    diaSemana: "",
+    horario: "",
+    local: "",
+    confirmado: false,
     proximo: true,
   },
   {
