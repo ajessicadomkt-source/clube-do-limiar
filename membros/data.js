@@ -51,7 +51,7 @@ const MES_ATUAL = {
 
   // Pergunta para reflexão ao longo do mês
   perguntaGerminativa:
-    “O que em mim sempre soube que existia algo mais — e ainda não sabia nomear?”,
+    "O que em mim sempre soube que existia algo mais — e ainda não sabia nomear?",
 
   // Símbolo escolhido para o mês
   simbolo: {
@@ -75,12 +75,10 @@ const MES_ATUAL = {
     {
       tipo: "filme",
       titulo: "Soul",
-      autor: "Pixar,2020"
-        
+      autor: "Pixar, 2020",
       descricao:
         "Uma animação sobre o que nos torna quem somos antes mesmo de vivermos. Leve, acessível e com camadas de profundidade para quem quiser ir além.",
-      
-          indicacao: "Assista prestando atenção nos espelhos.",
+      indicacao: "Assista prestando atenção nos espelhos.",
     },
     {
       tipo: "livro",
@@ -89,7 +87,6 @@ const MES_ATUAL = {
       descricao:
         "A obra mais acessível de Jung. O capítulo de Marie-Louise von Franz sobre individuação é especialmente relevante para este mês.",
       indicacao: "Leia com caderno ao lado.",
-
     },
   ],
 
@@ -133,7 +130,7 @@ const MES_ATUAL = {
     {
       tempo: "30min",
       momento: "Aprofundamento",
-      descricao: "Conversa aberta sobre Cisne Negro — a sombra como recurso, não como problema.",
+      descricao: "Conversa aberta sobre Soul — o que nos torna quem somos, antes mesmo de vivermos.",
     },
     {
       tempo: "15min",
