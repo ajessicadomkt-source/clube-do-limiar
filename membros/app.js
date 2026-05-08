@@ -392,7 +392,7 @@
       const div = el("div", "agenda-item" + (item.proximo ? " proximo" : ""));
       div.innerHTML = `
         <span class="agenda-num">${item.numero}</span>
-        <div>
+        <div class="agenda-corpo">
           ${item.proximo ? `<span class="agenda-badge">Próximo encontro</span>` : ""}
           <span class="agenda-tema">${item.tema}</span>
           <p class="agenda-detalhe">
@@ -403,6 +403,17 @@
       `;
       list.appendChild(div);
     });
+
+    // Botão único do calendário do clube — aparece abaixo da lista
+    const calBtn = document.getElementById("agenda-cal-btn");
+    if (calBtn) {
+      if (CONFIG.calendarUrl) {
+        calBtn.href = CONFIG.calendarUrl;
+        calBtn.style.display = "inline-flex";
+      } else {
+        calBtn.style.display = "none";
+      }
+    }
   }
 
   // ------ MEMBROS ------
@@ -413,8 +424,11 @@
 
     MEMBROS.forEach((m) => {
       const card = el("div", "membro-card");
+      const avatar = m.foto
+        ? `<div class="membro-foto-wrap"><img src="${m.foto}" alt="${m.nome}" class="membro-foto" loading="lazy"></div>`
+        : `<div class="membro-inicial">${m.nome.charAt(0).toUpperCase()}</div>`;
       card.innerHTML = `
-        <div class="membro-inicial">${m.nome.charAt(0).toUpperCase()}</div>
+        ${avatar}
         <span class="membro-nome">${m.nome}</span>
         <p class="membro-frase">${m.frase}</p>
       `;

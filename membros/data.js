@@ -18,6 +18,9 @@ const CONFIG = {
   nomeClube: "Clube do Limiar",
   subtitulo: "investigação simbólica da vida interior",
   facilitadora: "Jessica",
+  // Cole aqui o link do calendário compartilhado após criá-lo no Google.
+  // Deixe null enquanto o calendário não estiver pronto.
+  calendarUrl: null,
 };
 
 // ------------------------------------------------------------
@@ -192,7 +195,7 @@ const ARQUIVO = [
 // ------------------------------------------------------------
 // AGENDA — todos os encontros do ano
 // Adicione novas datas conforme o clube avança.
-// "confirmado": true/false — se false, aparece como "a confirmar"
+// "confirmado": true/false — se false, o local aparece como "a confirmar"
 // ------------------------------------------------------------
 const AGENDA = [
   {
@@ -201,9 +204,9 @@ const AGENDA = [
     data: "17 de maio de 2026",
     diaSemana: "Domingo",
     horario: "15h",
-    local: "Casa da Jessica",
+    local: "Casa da Jessica — Av. das Araucárias, 210",
     confirmado: true,
-    proximo: true, // marca como próximo encontro
+    proximo: true,
   },
   {
     numero: "02",
@@ -239,20 +242,24 @@ const AGENDA = [
 
 // ------------------------------------------------------------
 // MEMBROS
-// Cada membro tem nome e uma palavra ou frase curta escolhida por eles.
-// Edite livremente — adicione, remova ou altere.
+// Cada membro tem nome e uma frase curta escolhida por eles.
+// foto: caminho relativo para a imagem dentro da pasta membros/
+//   Exemplo: "fotos/jessica.jpg"
+//   Deixe null ou "" para exibir a inicial no lugar da foto.
+// As fotos devem ser salvas na pasta membros/fotos/ do repositório.
+// Tamanho ideal: 400x400px, formato JPG ou PNG.
 // ------------------------------------------------------------
 const MEMBROS = [
-  { nome: "Jessica", frase: "Facilitadora — curiosa compulsiva sobre o interior humano." },
-  { nome: "Ana", frase: "Busco o que está entre o sonho e o acorde." },
-  { nome: "Bruno", frase: "Chegando devagar ao que sempre esteve aqui." },
-  { nome: "Clara", frase: "Mitologia, cinema e café às três da manhã." },
-  { nome: "Daniel", frase: "Engenheiro que aprendeu a respeitar o irracional." },
-  { nome: "Fernanda", frase: "Escritora em pausa. Leitora de símbolos." },
-  { nome: "Gabriel", frase: "Psicólogo em formação. Aprendiz de sonhador." },
-  { nome: "Helena", frase: "Vivo entre a dança e o silêncio." },
-  { nome: "Isabela", frase: "Professora que estuda o que os livros não ensinam." },
-  { nome: "João", frase: "Médico. Aprendo a ouvir o que o corpo sussurra." },
-  { nome: "Luiza", frase: "Arquiteta de espaços internos e externos." },
-  { nome: "Marcos", frase: "Em investigação permanente." },
+  { nome: "Jessica", frase: "Facilitadora — curiosa compulsiva sobre o interior humano.", foto: null },
+  { nome: "Ana", frase: "Busco o que está entre o sonho e o acorde.", foto: null },
+  { nome: "Bruno", frase: "Chegando devagar ao que sempre esteve aqui.", foto: null },
+  { nome: "Clara", frase: "Mitologia, cinema e café às três da manhã.", foto: null },
+  { nome: "Daniel", frase: "Engenheiro que aprendeu a respeitar o irracional.", foto: null },
+  { nome: "Fernanda", frase: "Escritora em pausa. Leitora de símbolos.", foto: null },
+  { nome: "Gabriel", frase: "Psicólogo em formação. Aprendiz de sonhador.", foto: null },
+  { nome: "Helena", frase: "Vivo entre a dança e o silêncio.", foto: null },
+  { nome: "Isabela", frase: "Professora que estuda o que os livros não ensinam.", foto: null },
+  { nome: "João", frase: "Médico. Aprendo a ouvir o que o corpo sussurra.", foto: null },
+  { nome: "Luiza", frase: "Arquiteta de espaços internos e externos.", foto: null },
+  { nome: "Marcos", frase: "Em investigação permanente.", foto: null },
 ];
