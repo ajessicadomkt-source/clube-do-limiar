@@ -396,7 +396,7 @@
           ${item.proximo ? `<span class="agenda-badge">Próximo encontro</span>` : ""}
           <span class="agenda-tema">${item.tema}</span>
           <p class="agenda-detalhe">
-            ${item.diaSemana}, ${item.data} · ${item.horario}<br>
+            <span class="agenda-data-hora">${item.diaSemana}, ${item.data} · ${item.horario}</span><br>
             <span class="${item.confirmado ? "" : "agenda-a-confirmar"}">${item.local}</span>
           </p>
         </div>

@@ -21,13 +21,14 @@
   --border-bright: rgba(168, 127, 212, 0.45);
   /* Paleta clara — mesma lógica da seção "Como funciona" da página pública */
   --light-bg: #F2EFF8;
-  --light-card: #FFFFFF;
+  --light-card: #EAE5F5;
+  --light-hover: #E2DBF0;
   --light-text: #1A1530;
   --light-text-mid: #4A3F6B;
   --light-text-dim: #6B6080;
   --light-accent: #7B5EA7;
-  --light-gold: #9A7B40;
-  --light-border: rgba(180, 160, 220, 0.25);
+  --light-gold: #B08040;
+  --light-border: rgba(180, 160, 220, 0.3);
   --nav-width: 220px;
   --nav-width-collapsed: 60px;
 }
@@ -433,7 +434,7 @@ body {
   transition: opacity 0.35s;
 }
 
-.card:hover { background: #FAF8FF; box-shadow: 0 4px 24px rgba(120,80,200,0.07); }
+.card:hover { background: var(--light-hover); box-shadow: 0 4px 24px rgba(120,80,200,0.07); }
 .card:hover::before { opacity: 1; }
 
 .card-tag {
@@ -442,7 +443,7 @@ body {
   font-weight: 200;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--light-accent);
+  color: var(--light-gold);
   display: block;
   margin-bottom: 0.6rem;
   position: relative;
@@ -503,7 +504,8 @@ body {
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--light-text-dim);
+  color: var(--light-gold);
+  opacity: 0.8;
 }
 
 /* ============================================================
@@ -586,7 +588,7 @@ body {
   transition: background 0.3s, box-shadow 0.3s;
 }
 
-.curadoria-item:hover { background: #FAF8FF; box-shadow: 0 4px 20px rgba(120,80,200,0.06); }
+.curadoria-item:hover { background: var(--light-hover); box-shadow: 0 4px 20px rgba(120,80,200,0.06); }
 
 .curadoria-tipo {
   font-family: 'DM Sans', sans-serif;
@@ -594,7 +596,7 @@ body {
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--light-gold);
-  opacity: 0.85;
+  opacity: 1;
   display: inline-block;
   margin-bottom: 0.35rem;
 }
@@ -649,12 +651,13 @@ body {
   transition: background 0.3s;
 }
 
-.atividade-item:hover { background: #FAF8FF; }
+.atividade-item:hover { background: var(--light-hover); }
 
 .atividade-num {
   font-family: 'Cinzel', serif;
   font-size: 1.5rem;
-  color: #C4B0E0;
+  color: var(--light-gold);
+  opacity: 0.7;
   line-height: 1;
   flex-shrink: 0;
   padding-top: 0.1rem;
@@ -776,13 +779,14 @@ body {
   transition: opacity 0.3s;
 }
 
-.arquivo-card:hover { background: #FAF8FF; box-shadow: 0 4px 24px rgba(120,80,200,0.08); }
+.arquivo-card:hover { background: var(--light-hover); box-shadow: 0 4px 24px rgba(120,80,200,0.08); }
 .arquivo-card:hover::before { opacity: 1; }
 
 .arquivo-num {
   font-family: 'Cinzel', serif;
   font-size: 1.6rem;
-  color: #C4B0E0;
+  color: var(--light-gold);
+  opacity: 0.65;
   line-height: 1;
   margin-bottom: 0.75rem;
   display: block;
@@ -811,7 +815,7 @@ body {
   font-size: 0.6rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--light-text-dim);
+  color: var(--light-gold);
   opacity: 0.7;
   margin-top: 0.75rem;
   display: block;
@@ -889,7 +893,7 @@ body {
   transition: background 0.3s;
 }
 
-.agenda-item:hover { background: #FAF8FF; }
+.agenda-item:hover { background: var(--light-hover); }
 
 .agenda-item.proximo {
   background: #EDE8F8;
@@ -901,14 +905,15 @@ body {
 .agenda-num {
   font-family: 'Cinzel', serif;
   font-size: 1.2rem;
-  color: #C4B0E0;
+  color: var(--light-gold);
+  opacity: 0.6;
   flex-shrink: 0;
   line-height: 1;
   padding-top: 0.2rem;
   min-width: 2.2rem;
 }
 
-.agenda-item.proximo .agenda-num { color: var(--light-accent); }
+.agenda-item.proximo .agenda-num { color: var(--light-gold); opacity: 1; }
 
 .agenda-tema {
   font-family: 'Cinzel', serif;
@@ -925,6 +930,11 @@ body {
   color: var(--light-text-dim);
   line-height: 1.9;
   letter-spacing: 0.04em;
+}
+
+.agenda-detalhe .agenda-data-hora {
+  color: var(--light-gold);
+  opacity: 0.85;
 }
 
 .agenda-badge {
@@ -972,7 +982,7 @@ body {
   transition: opacity 0.3s;
 }
 
-.membro-card:hover { background: #FAF8FF; box-shadow: 0 4px 20px rgba(120,80,200,0.07); }
+.membro-card:hover { background: var(--light-hover); box-shadow: 0 4px 20px rgba(120,80,200,0.07); }
 .membro-card:hover::before { opacity: 1; }
 
 .membro-inicial {
