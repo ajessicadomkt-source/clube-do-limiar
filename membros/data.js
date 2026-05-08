@@ -20,7 +20,7 @@ const CONFIG = {
   facilitadora: "Jessica",
   // Cole aqui o link do calendário compartilhado após criá-lo no Google.
   // Deixe null enquanto o calendário não estiver pronto.
-  calendarUrl: https://calendar.google.com/calendar/u/0?cid=Y2YzMWYzMDllMjkzMDIxYTUxNTU1ZTQ2OWExZDkyODI2YjE4Njc4OGUxMWExZDI1NTE0NjMzZGI2YzZjZTdmNkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t,
+  calendarUrl: "https://calendar.google.com/calendar/u/0?cid=Y2YzMWYzMDllMjkzMDIxYTUxNTU1ZTQ2OWExZDkyODI2YjE4Njc4OGUxMWExZDI1NTE0NjMzZGI2YzZjZTdmNkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
 };
 
 // ------------------------------------------------------------
