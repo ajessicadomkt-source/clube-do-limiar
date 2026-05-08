@@ -267,7 +267,6 @@
           <span class="roteiro-tempo">${r.tempo}</span>
           <div>
             <span class="roteiro-momento">${r.momento}</span>
-            <p class="roteiro-desc">${r.descricao}</p>
           </div>
         `;
         roteiroContent.appendChild(row);
@@ -276,25 +275,66 @@
   }
 
   // ------ ARQUIVO ------
+  // Converte data em português ("17 de maio de 2026") para objeto Date
+  function parsePtDate(str) {
+    const meses = {
+      "janeiro": 0, "fevereiro": 1, "março": 2, "abril": 3,
+      "maio": 4, "junho": 5, "julho": 6, "agosto": 7,
+      "setembro": 8, "outubro": 9, "novembro": 10, "dezembro": 11
+    };
+    if (!str) return null;
+    const partes = str.toLowerCase().split(" de ");
+    if (partes.length < 3) return null;
+    const dia = parseInt(partes[0]);
+    const mes = meses[partes[1]];
+    const ano = parseInt(partes[2]);
+    if (isNaN(dia) || mes === undefined || isNaN(ano)) return null;
+    return new Date(ano, mes, dia);
+  }
+
   function renderArquivo() {
     const grid = document.getElementById("arquivo-grid");
     if (!grid) return;
     grid.innerHTML = "";
 
-    if (ARQUIVO.length === 0) {
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+
+    // Encontros da agenda cujas datas já passaram
+    const numerosNoArquivo = ARQUIVO.map((m) => m.numero);
+    const passados = AGENDA.filter((a) => {
+      const d = parsePtDate(a.data);
+      return d && d < hoje && !numerosNoArquivo.includes(a.numero);
+    });
+
+    // Combina arquivo manual + passados automáticos
+    const tudo = [
+      ...ARQUIVO,
+      ...passados.map((a) => ({
+        numero: a.numero,
+        tema: a.tema,
+        subtema: a.data,
+        data: a.data,
+        _pendente: true,
+      })),
+    ];
+
+    if (tudo.length === 0) {
       grid.innerHTML = `<p style="padding:2rem;color:var(--text-dim);font-style:italic;font-size:0.9rem;">O arquivo crescerá a cada mês concluído.</p>`;
       return;
     }
 
-    ARQUIVO.forEach((mes) => {
-      const card = el("div", "arquivo-card");
+    tudo.forEach((mes) => {
+      const card = el("div", "arquivo-card" + (mes._pendente ? " arquivo-pendente" : ""));
       card.innerHTML = `
         <span class="arquivo-num">${mes.numero}</span>
         <span class="arquivo-tema">${mes.tema}</span>
-        <span class="arquivo-subtema">${mes.subtema}</span>
+        <span class="arquivo-subtema">${mes._pendente ? "" : mes.subtema}</span>
         <span class="arquivo-data">${mes.data || ""}</span>
       `;
-      card.addEventListener("click", () => openModal(mes));
+      if (!mes._pendente) {
+        card.addEventListener("click", () => openModal(mes));
+      }
       grid.appendChild(card);
     });
   }
