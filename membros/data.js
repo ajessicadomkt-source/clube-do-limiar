@@ -44,29 +44,29 @@ const MES_ATUAL = {
   numero: "01",
 
   // Nome do tema principal
-  tema: "A Sombra",
+  tema: "Como viemos parar aqui?",
 
   // Subtítulo opcional
-  subtema: "o que vivemos mas não reconhecemos como nosso",
+  subtema: "Curiosidade, pertencimento e o primeiro passo juntos",
 
   // Pergunta para reflexão ao longo do mês
   perguntaGerminativa:
-    "O que em você ainda não tem nome — mas age, sente e escolhe?",
+    “O que em mim sempre soube que existia algo mais — e ainda não sabia nomear?”,
 
   // Símbolo escolhido para o mês
   simbolo: {
-    nome: "A Lua Nova",
+    nome: "A porta",
     descricao:
-      "Presença que não se vê. O ponto cego do céu que governa marés.",
+      "Toda porta é um limiar — existe entre dois mundos. Atravessá-la muda algo, mesmo que sutilmente. Este mês vocês estão atravessando uma porta juntos. O que está do outro lado ainda não se sabe.",
   },
 
   // Datas do encontro presencial
   encontro: {
-    data: "17 de maio de 2026",
-    diaSemana: "Domingo",
-    horario: "15h",
-    local: "Casa da Jessica — Av. das Araucárias, 210",
-    tema: "A Sombra",
+    data: "em breve",
+    diaSemana: "em breve",
+    horario: "em breve",
+    local: "em breve",
+    tema: "Como viemos parar aqui?",
   },
 
   // Curadoria: filmes, livros e textos recomendados
@@ -74,11 +74,13 @@ const MES_ATUAL = {
   curadoria: [
     {
       tipo: "filme",
-      titulo: "Cisne Negro",
-      autor: "Darren Aronofsky, 2010",
+      titulo: "Soul",
+      autor: "Pixar,2020"
+        
       descricao:
-        "Uma bailarina busca a perfeição e encontra o que havia negado em si mesma. Um estudo visceral sobre projeção e integração da sombra.",
-      indicacao: "Assista prestando atenção nos espelhos.",
+        "Uma animação sobre o que nos torna quem somos antes mesmo de vivermos. Leve, acessível e com camadas de profundidade para quem quiser ir além.",
+      
+          indicacao: "Assista prestando atenção nos espelhos.",
     },
     {
       tipo: "livro",
@@ -87,22 +89,7 @@ const MES_ATUAL = {
       descricao:
         "A obra mais acessível de Jung. O capítulo de Marie-Louise von Franz sobre individuação é especialmente relevante para este mês.",
       indicacao: "Leia com caderno ao lado.",
-    },
-    {
-      tipo: "texto",
-      titulo: "A Sombra",
-      autor: "Robert Johnson — trecho de 'Owning Your Own Shadow'",
-      descricao:
-        "Um texto curto e denso sobre o que fazemos com as partes de nós que o mundo não aprovou. Disponível no grupo.",
-      indicacao: "",
-    },
-    {
-      tipo: "livro",
-      titulo: "Contos de Grimm",
-      autor: "Jacob e Wilhelm Grimm",
-      descricao:
-        "Escolha três contos que te perturbam. O que te perturba geralmente fala da sombra. Não leia como história infantil.",
-      indicacao: "Foco nos contos com duplos, bruxas e espelhos.",
+
     },
   ],
 
