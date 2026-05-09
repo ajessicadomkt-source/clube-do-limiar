@@ -108,6 +108,8 @@
     if (target) target.classList.add("active");
     const link = document.querySelector(`.nav-link[data-section="${id}"]`);
     if (link) link.classList.add("active");
+    // Atualiza a URL com o hash da seção
+    history.replaceState(null, "", "#" + id);
     // Fecha nav mobile ao navegar
     if (nav && nav.classList.contains("open")) toggleNav();
     // Scroll ao topo
@@ -145,7 +147,10 @@
     renderArquivo();
     renderAgenda();
     renderMembros();
-    showSection("inicio");
+    // Abre a seção indicada pelo hash da URL, ou Início por padrão
+    const hash = window.location.hash.replace("#", "");
+    const secoes = ["inicio", "mes", "arquivo", "agenda", "membros"];
+    showSection(secoes.includes(hash) ? hash : "inicio");
   }
 
   // Helpers
