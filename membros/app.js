@@ -185,12 +185,13 @@
       `;
     }
 
-    // Semente da semana
+    // Afirmação da semana — troca automaticamente a cada 7 dias
     const sementeEl = document.getElementById("inicio-semente");
     if (sementeEl) {
+      const semanaAtual = Math.floor(Date.now() / (7 * 24 * 60 * 60 * 1000));
+      const afirmacao = AFIRMACOES[semanaAtual % AFIRMACOES.length];
       sementeEl.innerHTML = `
-        <p class="semente-texto">"${SEMENTE_SEMANA.texto}"</p>
-        <span class="semente-meta">${SEMENTE_SEMANA.autor} · ${SEMENTE_SEMANA.data}</span>
+        <p class="semente-texto">"${afirmacao}"</p>
       `;
     }
   }

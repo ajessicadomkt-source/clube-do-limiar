@@ -20,14 +20,21 @@ const CONFIG = {
 };
 
 // ------------------------------------------------------------
-// SEMENTE DA SEMANA
+// AFIRMAÇÕES DA SEMANA
+// Troca automaticamente a cada semana — sem precisar editar.
+// Adicione ou remova frases à vontade; a rotação se ajusta sozinha.
 // ------------------------------------------------------------
-const SEMENTE_SEMANA = {
-  data: "08 de maio de 2026",
-  texto:
-    "O símbolo não explica — ele convida. Antes de nomear o que você sentiu, pergunte: que imagem veio primeiro?",
-  autor: "Jessica",
-};
+const AFIRMACOES = [
+  "Eu não preciso me tornar nada. Já sou o que preciso ser para começar.",
+  "Minha vida não começa quando eu encontrar meu propósito. Ela já está acontecendo.",
+  "Eu não estou atrasado. Estou exatamente onde preciso estar.",
+  "Eu tenho permissão para atravessar a porta — mesmo sem saber o que está do outro lado.",
+  "Cada passo que dou já é a travessia. Não existe ponto de chegada antes de começar.",
+  "Eu confio no que em mim já sabe o caminho, mesmo quando minha mente não sabe.",
+  "Eu sou suficiente hoje. O amanhã se constrói a partir disso.",
+  "Eu paro de adiar a vida que quero viver. Ela começa agora.",
+  "Eu escolho estar presente na vida que tenho enquanto construo a que quero.",
+];
 
 // ------------------------------------------------------------
 // MÊS ATUAL
