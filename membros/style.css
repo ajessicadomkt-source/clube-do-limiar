@@ -120,9 +120,56 @@ body {
   animation: fadeUp 0.9s ease 0.3s both;
 }
 
-.login-sigil {
-  margin: 0 auto 2rem;
-  width: 48px; height: 48px;
+.login-orbit {
+  position: relative;
+  width: 90px; height: 90px;
+  margin: 0 auto 2.5rem;
+}
+
+.login-orbit-1, .login-orbit-2 {
+  position: absolute;
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  pointer-events: none;
+}
+
+.login-orbit-1 {
+  width: 90px; height: 90px;
+  border: 1px solid rgba(168, 127, 212, 0.18);
+  transform: translate(-50%, -50%);
+  animation: spin 50s linear infinite;
+}
+
+.login-orbit-1::before {
+  content: '';
+  position: absolute;
+  width: 4px; height: 4px;
+  background: var(--accent);
+  border-radius: 50%;
+  top: -2px; left: 50%;
+  box-shadow: 0 0 12px var(--accent), 0 0 24px rgba(168,127,212,0.4);
+}
+
+.login-orbit-2 {
+  width: 58px; height: 58px;
+  border: 1px solid rgba(200, 169, 106, 0.15);
+  transform: translate(-50%, -50%);
+  animation: spin 80s linear infinite reverse;
+}
+
+.login-orbit-2::before {
+  content: '';
+  position: absolute;
+  width: 3px; height: 3px;
+  background: var(--gold);
+  border-radius: 50%;
+  bottom: -1.5px; right: 25%;
+  box-shadow: 0 0 7px var(--gold);
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 .login-title {
@@ -565,9 +612,9 @@ body {
 }
 
 .simbolo-desc {
-  font-size: 0.88rem;
+  font-size: 1rem;
   color: var(--text-dim);
-  line-height: 1.7;
+  line-height: 1.8;
   font-style: italic;
 }
 
@@ -619,18 +666,36 @@ body {
 }
 
 .curadoria-desc {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--light-text-mid);
-  line-height: 1.8;
+  line-height: 1.85;
 }
 
 .curadoria-indicacao {
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.82rem;
   color: var(--light-accent);
-  opacity: 0.85;
-  margin-top: 0.5rem;
+  opacity: 0.9;
+  margin-top: 0.6rem;
   font-style: italic;
+}
+
+.curadoria-trailer {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  margin: 1rem 0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.curadoria-trailer iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 /* Atividades */
@@ -958,34 +1023,47 @@ body {
 .agenda-corpo { flex: 1; }
 
 .agenda-cal-wrap {
-  margin-top: 1.75rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--light-border);
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .btn-gcal {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  margin-top: 0.85rem;
-  padding: 0.4rem 0.85rem;
-  border: 1px solid rgba(176, 128, 64, 0.35);
+  gap: 0.7rem;
+  padding: 0.9rem 2rem;
+  background: linear-gradient(135deg, rgba(176,128,64,0.12), rgba(176,128,64,0.06));
+  border: 1px solid rgba(176, 128, 64, 0.5);
   color: var(--light-gold);
   text-decoration: none;
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
   cursor: none;
-  transition: border-color 0.3s, background 0.3s, color 0.3s;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.35s, color 0.35s;
 }
 
-.btn-gcal:hover {
-  border-color: rgba(176, 128, 64, 0.7);
-  background: rgba(176, 128, 64, 0.07);
-  color: #9A6820;
+.btn-gcal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(176,128,64,0.18), rgba(176,128,64,0.08));
+  transform: translateX(-101%);
+  transition: transform 0.4s ease;
 }
+
+.btn-gcal:hover { border-color: rgba(176, 128, 64, 0.85); color: #8A5E18; }
+.btn-gcal:hover::before { transform: translateX(0); }
+
+.btn-gcal svg { position: relative; flex-shrink: 0; }
+.btn-gcal span { position: relative; }
 
 /* ============================================================
    MEMBROS

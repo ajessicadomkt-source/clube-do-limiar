@@ -34,11 +34,11 @@ const SEMENTE_SEMANA = {
 // ------------------------------------------------------------
 const MES_ATUAL = {
   numero: "01",
-  tema: "Como viemos parar aqui?",
-  subtema: "Curiosidade, pertencimento e o primeiro passo juntos",
+  tema: "A Travessia",
+  subtema: "Toda jornada começa com um limiar.",
 
   perguntaGerminativa:
-    "O que em mim sempre soube que existia algo mais — e ainda não sabia nomear?",
+    "O que me trouxe até aqui — e o que isso diz sobre mim?",
 
   simbolo: {
     nome: "A porta",
@@ -56,30 +56,18 @@ const MES_ATUAL = {
 
   curadoria: [
     {
-      tipo: "filme",
+      tipo: "atividade",
       titulo: "Soul",
       autor: "Pixar, 2020",
+      disponivel: "Disponível na Disney+",
+      trailer: "https://www.youtube.com/embed/Sz-jdlM_YGk?si=dHoVK_-n2GIgsyZR",
       descricao:
-        "Uma animação sobre o que nos torna quem somos antes mesmo de vivermos. Leve, acessível e com camadas de profundidade para quem quiser ir além. Material único deste mês.",
-      indicacao: "Assista com atenção antes do encontro — todos chegarão preparados para debater.",
-    },
-    {
-      tipo: "texto",
-      titulo: "Carta de abertura",
-      autor: "Jessica",
-      descricao:
-        "Uma página escrita com voz pessoal: as motivações para criar o clube, as crenças sobre o que é possível neste espaço e uma pergunta pessoal carregada. O primeiro contato com o espírito do Limiar.",
-      indicacao: "",
+        "Uma animação sobre o que nos torna quem somos antes mesmo de vivermos. Assista sem celular ou pausas, com atenção plena.",
+      indicacao: "Enquanto assiste, observe: em qual personagem você se reconhece? E qual porta do filme ressoa com alguma porta sua?",
     },
   ],
 
-  atividades: [
-    {
-      titulo: "Assistir Soul",
-      descricao:
-        "Sem celular ou pausas. Ao terminar, anote uma frase, cena ou imagem que impactou — sem explicar o porquê. Traga a anotação ao encontro.",
-    },
-  ],
+  atividades: [],
 
   // Roteiro do encontro — os descritivos ficam aqui como referência da facilitadora
   // mas não aparecem na interface para os membros
@@ -146,7 +134,7 @@ const ARQUIVO = [
 const AGENDA = [
   {
     numero: "01",
-    tema: "Como viemos parar aqui?",
+    tema: "A Travessia",
     data: "em breve mais informações",
     diaSemana: "",
     horario: "",

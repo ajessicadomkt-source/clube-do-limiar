@@ -233,7 +233,13 @@
         div.innerHTML = `
           <span class="curadoria-tipo">${item.tipo}</span>
           <span class="curadoria-titulo">${item.titulo}</span>
-          <span class="curadoria-autor">${item.autor}</span>
+          <span class="curadoria-autor">${item.autor}${item.disponivel ? ` · <em>${item.disponivel}</em>` : ""}</span>
+          ${item.trailer ? `
+            <div class="curadoria-trailer">
+              <iframe src="${item.trailer}" title="Trailer" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>` : ""}
           <p class="curadoria-desc">${item.descricao}</p>
           ${item.indicacao ? `<p class="curadoria-indicacao">→ ${item.indicacao}</p>` : ""}
         `;
