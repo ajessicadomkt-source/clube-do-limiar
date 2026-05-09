@@ -68,6 +68,7 @@
     if (app) {
       app.classList.add("visible");
       renderAll();
+      initRoteiroToggle();
     }
     setTimeout(() => bindCursorHover("a, button, .arquivo-card, .nav-link"), 100);
   }
@@ -494,18 +495,7 @@
 
   // ----------------------------------------------------------
   // INICIALIZAÇÃO
+  // Login temporariamente desativado — acesso direto ao conteúdo
   // ----------------------------------------------------------
-  if (isAuthenticated()) {
-    showApp();
-  } else {
-    bindCursorHover("button, input");
-  }
-
-  // O roteiro toggle precisa ser iniciado após o DOM estar pronto
-  document.addEventListener("DOMContentLoaded", () => {
-    if (isAuthenticated()) initRoteiroToggle();
-  });
-
-  // Garantir que o toggle seja iniciado mesmo se o DOM já carregou
-  window.addEventListener("load", initRoteiroToggle);
+  showApp();
 })();

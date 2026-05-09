@@ -34,16 +34,16 @@ const SEMENTE_SEMANA = {
 // ------------------------------------------------------------
 const MES_ATUAL = {
   numero: "01",
-  tema: "A Travessia",
+  tema: "A Vida que Adiamos",
   subtema: "Toda jornada começa com um limiar.",
 
   perguntaGerminativa:
-    "O que me trouxe até aqui — e o que isso diz sobre mim?",
+    "O que você faria se soubesse que já é suficiente?",
 
   simbolo: {
     nome: "A porta",
     descricao:
-      "Toda porta é um limiar — existe entre dois mundos. Atravessá-la transforma, mesmo que sutilmente. Este mês vocês estão atravessando uma porta juntos. O que está do outro lado ainda não se sabe.",
+      "Joe Gardner perseguiu uma porta específica — Carnegie Hall — durante toda a sua vida, quase perdendo tudo por isso. Neste mês, a pergunta não é qual porta você quer abrir, mas quem escolheu essa porta para você.",
   },
 
   encontro: {
@@ -64,8 +64,16 @@ const MES_ATUAL = {
       trailerUrl: "https://www.youtube.com/watch?v=Sz-jdlM_YGk",
       trailerThumb: "https://img.youtube.com/vi/Sz-jdlM_YGk/hqdefault.jpg",
       descricao:
-        "Uma animação sobre o que nos torna quem somos antes mesmo de vivermos. Assista sem celular ou pausas, com atenção plena.",
+        "Uma narrativa sobre propósito que questiona a validade das perguntas que fazemos — sem oferecer respostas diretas. Assista sem distrações (celular desligado, sem pausas). Ao terminar, anote uma frase, cena ou imagem que ficou — sem precisar explicar. Traga o registro ao encontro.",
       indicacao: "Enquanto assiste, observe: em qual personagem você se reconhece? E qual porta do filme ressoa com alguma porta sua?",
+    },
+    {
+      tipo: "leitura opcional",
+      titulo: "Ikigai",
+      autor: "Héctor García e Francesc Miralles",
+      descricao:
+        "O conceito japonês que define propósito como a interseção entre paixão, competência, o que o mundo precisa e o que te remunera. Uma perspectiva radicalmente diferente da do filme — e exatamente por isso vale a comparação.",
+      indicacao: "Leitura opcional. Traga suas dúvidas e divergências para enriquecer o debate.",
     },
   ],
 
@@ -86,7 +94,7 @@ const MES_ATUAL = {
     },
     {
       tempo: "0:50",
-      momento: "Debate sobre Soul",
+      momento: "Debate — A vida que adiamos",
       descricao: "",
     },
     {
@@ -136,7 +144,7 @@ const ARQUIVO = [
 const AGENDA = [
   {
     numero: "01",
-    tema: "A Travessia",
+    tema: "A Vida que Adiamos",
     data: "em breve mais informações",
     diaSemana: "",
     horario: "",
