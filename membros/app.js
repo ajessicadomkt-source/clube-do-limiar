@@ -235,11 +235,10 @@
           <span class="curadoria-titulo">${item.titulo}</span>
           <span class="curadoria-autor">${item.autor}${item.disponivel ? ` · <em>${item.disponivel}</em>` : ""}</span>
           ${item.trailer ? `
-            <div class="curadoria-trailer">
-              <iframe src="${item.trailer}" title="Trailer" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>` : ""}
+            <a class="curadoria-trailer" href="${item.trailerUrl}" target="_blank" rel="noopener" aria-label="Assistir trailer no YouTube">
+              <img src="${item.trailerThumb}" alt="Trailer ${item.titulo}" loading="lazy">
+              <div class="curadoria-trailer-play">▶</div>
+            </a>` : ""}
           <p class="curadoria-desc">${item.descricao}</p>
           ${item.indicacao ? `<p class="curadoria-indicacao">→ ${item.indicacao}</p>` : ""}
         `;

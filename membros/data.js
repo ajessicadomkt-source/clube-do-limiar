@@ -60,7 +60,9 @@ const MES_ATUAL = {
       titulo: "Soul",
       autor: "Pixar, 2020",
       disponivel: "Disponível na Disney+",
-      trailer: "https://www.youtube.com/embed/Sz-jdlM_YGk?si=dHoVK_-n2GIgsyZR",
+      trailer: true,
+      trailerUrl: "https://www.youtube.com/watch?v=Sz-jdlM_YGk",
+      trailerThumb: "https://img.youtube.com/vi/Sz-jdlM_YGk/hqdefault.jpg",
       descricao:
         "Uma animação sobre o que nos torna quem somos antes mesmo de vivermos. Assista sem celular ou pausas, com atenção plena.",
       indicacao: "Enquanto assiste, observe: em qual personagem você se reconhece? E qual porta do filme ressoa com alguma porta sua?",
