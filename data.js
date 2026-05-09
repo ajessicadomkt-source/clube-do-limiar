@@ -20,30 +20,37 @@ const CONFIG = {
 };
 
 // ------------------------------------------------------------
-// SEMENTE DA SEMANA
+// AFIRMAÇÕES DA SEMANA
+// Troca automaticamente a cada semana — sem precisar editar.
+// Adicione ou remova frases à vontade; a rotação se ajusta sozinha.
 // ------------------------------------------------------------
-const SEMENTE_SEMANA = {
-  data: "08 de maio de 2026",
-  texto:
-    "O símbolo não explica — ele convida. Antes de nomear o que você sentiu, pergunte: que imagem veio primeiro?",
-  autor: "Jessica",
-};
+const AFIRMACOES = [
+  "Eu não preciso me tornar nada. Já sou o que preciso ser para começar.",
+  "Minha vida não começa quando eu encontrar meu propósito. Ela já está acontecendo.",
+  "Eu não estou atrasado. Estou exatamente onde preciso estar.",
+  "Eu tenho permissão para atravessar a porta — mesmo sem saber o que está do outro lado.",
+  "Cada passo que dou já é a travessia. Não existe ponto de chegada antes de começar.",
+  "Eu confio no que em mim já sabe o caminho, mesmo quando minha mente não sabe.",
+  "Eu sou suficiente hoje. O amanhã se constrói a partir disso.",
+  "Eu paro de adiar a vida que quero viver. Ela começa agora.",
+  "Eu escolho estar presente na vida que tenho enquanto construo a que quero.",
+];
 
 // ------------------------------------------------------------
 // MÊS ATUAL
 // ------------------------------------------------------------
 const MES_ATUAL = {
   numero: "01",
-  tema: "Como viemos parar aqui?",
-  subtema: "Curiosidade, pertencimento e o primeiro passo juntos",
+  tema: "A Vida que Adiamos",
+  subtema: "Toda jornada começa com um limiar.",
 
   perguntaGerminativa:
-    "O que me trouxe até aqui — e o que isso diz sobre mim?",
+    "O que você faria se soubesse que já é suficiente?",
 
   simbolo: {
     nome: "A porta",
     descricao:
-      "Toda porta é um limiar — existe entre dois mundos. Atravessá-la transforma, mesmo que sutilmente. Este mês vocês estão atravessando uma porta juntos. O que está do outro lado ainda não se sabe.",
+      "Joe Gardner perseguiu uma porta específica — Carnegie Hall — durante toda a sua vida, quase perdendo tudo por isso. Neste mês, a pergunta não é qual porta você quer abrir, mas quem escolheu essa porta para você.",
   },
 
   encontro: {
@@ -59,9 +66,21 @@ const MES_ATUAL = {
       tipo: "atividade",
       titulo: "Soul",
       autor: "Pixar, 2020",
+      disponivel: "Disponível na Disney+",
+      trailer: true,
+      trailerUrl: "https://www.youtube.com/watch?v=Sz-jdlM_YGk",
+      trailerThumb: "https://img.youtube.com/vi/Sz-jdlM_YGk/hqdefault.jpg",
       descricao:
-        "Uma animação sobre o que nos torna quem somos antes mesmo de vivermos. Assista sem celular ou pausas, com atenção plena.",
+        "Uma narrativa sobre propósito que questiona a validade das perguntas que fazemos — sem oferecer respostas diretas. Assista sem distrações (celular desligado, sem pausas). Ao terminar, anote uma frase, cena ou imagem que ficou — sem precisar explicar. Traga o registro ao encontro.",
       indicacao: "Enquanto assiste, observe: em qual personagem você se reconhece? E qual porta do filme ressoa com alguma porta sua?",
+    },
+    {
+      tipo: "leitura opcional",
+      titulo: "Ikigai",
+      autor: "Héctor García e Francesc Miralles",
+      descricao:
+        "O conceito japonês que define propósito como a interseção entre paixão, competência, o que o mundo precisa e o que te remunera. Uma perspectiva radicalmente diferente da do filme — e exatamente por isso vale a comparação.",
+      indicacao: "Leitura opcional. Traga suas dúvidas e divergências para enriquecer o debate.",
     },
   ],
 
@@ -72,7 +91,7 @@ const MES_ATUAL = {
   roteiro: [
     {
       tempo: "0:00",
-      momento: "Limiar — Abertura ritualística",
+      momento: "Abertura",
       descricao: "",
     },
     {
@@ -82,7 +101,7 @@ const MES_ATUAL = {
     },
     {
       tempo: "0:50",
-      momento: "Debate sobre Soul",
+      momento: "Debate — A vida que adiamos",
       descricao: "",
     },
     {
@@ -132,7 +151,7 @@ const ARQUIVO = [
 const AGENDA = [
   {
     numero: "01",
-    tema: "Como viemos parar aqui?",
+    tema: "A Vida que Adiamos",
     data: "em breve mais informações",
     diaSemana: "",
     horario: "",
@@ -142,31 +161,31 @@ const AGENDA = [
   },
   {
     numero: "02",
-    tema: "Anima e Animus",
-    data: "21 de junho de 2026",
-    diaSemana: "Domingo",
-    horario: "15h",
-    local: "A confirmar",
+    tema: "Em breve",
+    data: "",
+    diaSemana: "",
+    horario: "",
+    local: "",
     confirmado: false,
     proximo: false,
   },
   {
     numero: "03",
-    tema: "O Self",
-    data: "19 de julho de 2026",
-    diaSemana: "Domingo",
-    horario: "15h",
-    local: "A confirmar",
+    tema: "Em breve",
+    data: "",
+    diaSemana: "",
+    horario: "",
+    local: "",
     confirmado: false,
     proximo: false,
   },
   {
     numero: "04",
-    tema: "Sonhos como linguagem",
-    data: "16 de agosto de 2026",
-    diaSemana: "Domingo",
-    horario: "15h",
-    local: "A confirmar",
+    tema: "Em breve",
+    data: "",
+    diaSemana: "",
+    horario: "",
+    local: "",
     confirmado: false,
     proximo: false,
   },
