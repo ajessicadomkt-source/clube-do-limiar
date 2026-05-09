@@ -41,7 +41,7 @@ const AFIRMACOES = [
 // ------------------------------------------------------------
 const MES_ATUAL = {
   numero: "01",
-  tema: "A Vida que Adiamos",
+  tema: "Propósito: A Vida que Adiamos",
   subtema: "Toda jornada começa com um limiar.",
 
   perguntaGerminativa:
