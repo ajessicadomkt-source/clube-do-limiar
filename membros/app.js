@@ -441,10 +441,10 @@
         <div class="agenda-corpo">
           ${item.proximo ? `<span class="agenda-badge">Próximo encontro</span>` : ""}
           <span class="agenda-tema">${item.tema}</span>
-          <p class="agenda-detalhe">
-            <span class="agenda-data-hora">${item.diaSemana}, ${item.data} · ${item.horario}</span><br>
-            <span class="${item.confirmado ? "" : "agenda-a-confirmar"}">${item.local}</span>
-          </p>
+          ${item.data ? `<p class="agenda-detalhe">
+            <span class="agenda-data-hora">${[item.diaSemana, item.data].filter(Boolean).join(", ")}${item.horario ? " · " + item.horario : ""}</span>
+            ${item.local ? `<br><span class="${item.confirmado ? "" : "agenda-a-confirmar"}">${item.local}</span>` : ""}
+          </p>` : ""}
         </div>
       `;
       list.appendChild(div);
