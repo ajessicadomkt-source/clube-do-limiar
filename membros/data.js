@@ -84,7 +84,7 @@ const MES_ATUAL = {
   roteiro: [
     {
       tempo: "0:00",
-      momento: "Limiar — Abertura ritualística",
+      momento: "Abertura",
       descricao: "",
     },
     {
