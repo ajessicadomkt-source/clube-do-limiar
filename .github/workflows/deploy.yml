@@ -20,7 +20,9 @@ jobs:
           protocol: ftp
           port: 21
           server-dir: /public_html/
+          dangerous-clean-slate: false
           exclude: |
             **/.git*
             **/.git*/**
             **/node_modules/**
+            **/.ftp-deploy-sync-state.json
