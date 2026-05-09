@@ -151,7 +151,7 @@ const ARQUIVO = [
 const AGENDA = [
   {
     numero: "01",
-    tema: "A Vida que Adiamos",
+    tema: "Propósito: A Vida que Adiamos",
     data: "em breve mais informações",
     diaSemana: "",
     horario: "",
