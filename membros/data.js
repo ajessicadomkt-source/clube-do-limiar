@@ -41,7 +41,7 @@ const AFIRMACOES = [
 // ------------------------------------------------------------
 const MES_ATUAL = {
   numero: "01",
-  tema: "Propósito: A Vida que Adiamos",
+  tema: "Propósito: a vida que adiamos",
   subtema: "Toda jornada começa com um limiar.",
 
   perguntaGerminativa:
@@ -54,11 +54,11 @@ const MES_ATUAL = {
   },
 
   encontro: {
-    data: "17 de maio de 2026",
+    data: "14 de junho de 2026",
     diaSemana: "Domingo",
     horario: "15h",
-    local: "Casa da Jessica — Av. das Araucárias, 210",
-    tema: "Como viemos parar aqui?",
+    local: "Rua João Paul, 280. Apto 2601. Bairro Floresta.",
+    tema: "Propósito: a vida que adiamos",
   },
 
   curadoria: [
@@ -151,12 +151,12 @@ const ARQUIVO = [
 const AGENDA = [
   {
     numero: "01",
-    tema: "Propósito: A Vida que Adiamos",
-    data: "em breve mais informações",
-    diaSemana: "",
-    horario: "",
-    local: "",
-    confirmado: false,
+    tema: "Propósito: a vida que adiamos",
+    data: "14 de junho de 2026",
+    diaSemana: "Domingo",
+    horario: "15h",
+    local: "Rua João Paul, 280. Apto 2601. Bairro Floresta.",
+    confirmado: true,
     proximo: true,
   },
   {
