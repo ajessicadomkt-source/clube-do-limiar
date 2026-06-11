@@ -161,7 +161,8 @@ const AGENDA = [
   },
   {
     numero: "02",
-    tema: "Em breve",
+    tema: "Tudo ao Seu Tempo",
+    subtema: "O que culturas milenares sabem sobre o tempo que nós esquecemos",
     data: "",
     diaSemana: "",
     horario: "",

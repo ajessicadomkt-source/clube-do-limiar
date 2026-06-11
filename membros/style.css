@@ -1013,6 +1013,15 @@ body {
   margin-bottom: 0.35rem;
 }
 
+.agenda-subtema {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.82rem;
+  font-style: italic;
+  color: var(--light-text-dim);
+  margin: 0 0 0.35rem;
+  line-height: 1.5;
+}
+
 .agenda-detalhe {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.7rem;
