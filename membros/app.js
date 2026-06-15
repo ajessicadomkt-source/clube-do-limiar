@@ -175,8 +175,8 @@
     if (encontroEl && proximo) {
       encontroEl.innerHTML = `
         <span class="card-tag">Próximo encontro</span>
-        <p class="card-body">${proximo.data}</p>
-        <p class="card-detail">${proximo.local}</p>
+        <p class="card-body">${proximo.data || "Data em breve"}</p>
+        ${proximo.local ? `<p class="card-detail">${proximo.local}</p>` : ""}
       `;
     }
 
