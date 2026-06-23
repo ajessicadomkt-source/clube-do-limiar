@@ -3,6 +3,11 @@
 (function () {
   "use strict";
 
+  // ------ SUPABASE CLIENT ------
+  const _sb = (typeof supabase !== "undefined" && typeof SUPABASE_URL !== "undefined" && typeof SUPABASE_ANON_KEY !== "undefined")
+    ? supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    : null;
+
   // ----------------------------------------------------------
   // CURSOR PERSONALIZADO
   // ----------------------------------------------------------
@@ -70,6 +75,7 @@
       renderAll();
       initRoteiroToggle();
       initRedeForm();
+      loadMembrosData();
     }
     setTimeout(() => bindCursorHover("a, button, .arquivo-card, .nav-link"), 100);
   }
@@ -201,43 +207,9 @@
       `;
     }
 
-    // Aniversariantes do mês
+    // Aniversariantes são preenchidos por loadMembrosData() após busca no Supabase
     const anivEl = document.getElementById("inicio-aniversariantes");
-    if (anivEl) {
-      const mesAtual = new Date().getMonth() + 1;
-      const meses = ["","janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
-      const aniversariantes = MEMBROS.filter((m) => {
-        if (!m.aniversario) return false;
-        const mes = parseInt(m.aniversario.split("/")[1], 10);
-        return mes === mesAtual;
-      }).sort((a, b) => parseInt(a.aniversario) - parseInt(b.aniversario));
-
-      if (aniversariantes.length) {
-        const itens = aniversariantes.map((m) => {
-          const [dia, mes] = m.aniversario.split("/").map(Number);
-          const signo = calcularSigno(dia, mes);
-          return `
-            <div class="aniversariante-item">
-              <span class="aniversariante-signo">${signo.simbolo}</span>
-              <div class="aniversariante-info">
-                <span class="aniversariante-nome">${m.nome}</span>
-                <span class="aniversariante-detalhe">dia ${dia} · ${signo.nome}</span>
-              </div>
-            </div>`;
-        }).join("");
-
-        anivEl.innerHTML = `
-          <div class="inner-divider">
-            <div class="inner-divider-line"></div>
-            <span class="inner-divider-dot">✦</span>
-            <div class="inner-divider-line"></div>
-          </div>
-          <span class="section-eyebrow">Aniversariantes de ${meses[mesAtual]}</span>
-          <div class="aniversariantes-list">${itens}</div>`;
-      } else {
-        anivEl.innerHTML = "";
-      }
-    }
+    if (anivEl) anivEl.innerHTML = "";
   }
 
   // ------ MÊS ATUAL ------
@@ -528,39 +500,94 @@
   // ------ REDE DE PROSPERIDADE ------
   function renderMembros() {
     const grid = document.getElementById("membros-grid");
-    if (!grid) return;
-    grid.innerHTML = "";
+    if (grid) grid.innerHTML = `<p class="rede-vazia">Carregando...</p>`;
+  }
 
-    if (!MEMBROS.length) {
-      grid.innerHTML = `<p class="rede-vazia">Os cadastros aparecerão aqui em breve.</p>`;
+  async function loadMembrosData() {
+    const grid   = document.getElementById("membros-grid");
+    const anivEl = document.getElementById("inicio-aniversariantes");
+    const nomeMes = ["","janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+
+    if (!_sb) {
+      if (grid)   grid.innerHTML   = `<p class="rede-vazia">Os cadastros aparecerão aqui em breve.</p>`;
+      if (anivEl) anivEl.innerHTML = "";
       return;
     }
 
-    MEMBROS.forEach((m) => {
-      const card = el("div", "membro-card");
-      const links = [
-        m.instagram ? `<a href="${m.instagram}" target="_blank" rel="noopener" class="membro-link">Instagram</a>` : "",
-        m.whatsapp  ? `<a href="https://wa.me/55${m.whatsapp.replace(/\D/g,'')}" target="_blank" rel="noopener" class="membro-link">WhatsApp</a>` : "",
-        m.site      ? `<a href="${m.site}" target="_blank" rel="noopener" class="membro-link">Site</a>` : "",
-      ].filter(Boolean).join("");
+    const { data } = await _sb
+      .from("membros_rede")
+      .select("*")
+      .eq("aprovado", true)
+      .order("nome");
 
-      card.innerHTML = `
-        ${m.atendimento ? `<span class="membro-atendimento">${m.atendimento}</span>` : ""}
-        <span class="membro-negocio">${m.negocio}</span>
-        <span class="membro-nome">${m.nome}</span>
-        <p class="membro-faz">${m.oquefaz}</p>
-        ${m.paraquem ? `<p class="membro-para"><span>Para:</span> ${m.paraquem}</p>` : ""}
-        ${(() => {
-          if (!m.aniversario) return "";
-          const [dia, mes] = m.aniversario.split("/").map(Number);
-          const signo = calcularSigno(dia, mes);
-          const meses = ["","janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
-          return `<p class="membro-aniversario">${signo.simbolo} ${signo.nome} · ${dia} de ${meses[mes]}</p>`;
-        })()}
-        ${links ? `<div class="membro-contatos">${links}</div>` : ""}
-      `;
-      grid.appendChild(card);
-    });
+    const membros = data || [];
+
+    // Renderiza o grid da Rede
+    if (grid) {
+      if (!membros.length) {
+        grid.innerHTML = `<p class="rede-vazia">Os cadastros aparecerão aqui em breve.</p>`;
+      } else {
+        grid.innerHTML = "";
+        membros.forEach((m) => {
+          const card = el("div", "membro-card");
+          const links = [
+            m.instagram ? `<a href="${m.instagram}" target="_blank" rel="noopener" class="membro-link">Instagram</a>` : "",
+            m.whatsapp  ? `<a href="https://wa.me/55${m.whatsapp.replace(/\D/g,"")}" target="_blank" rel="noopener" class="membro-link">WhatsApp</a>` : "",
+            m.site      ? `<a href="${m.site}" target="_blank" rel="noopener" class="membro-link">Site</a>` : "",
+          ].filter(Boolean).join("");
+
+          const aniversarioHtml = (() => {
+            if (!m.aniversario_dia || !m.aniversario_mes) return "";
+            const signo = calcularSigno(m.aniversario_dia, m.aniversario_mes);
+            return `<p class="membro-aniversario">${signo.simbolo} ${signo.nome} · ${m.aniversario_dia} de ${nomeMes[m.aniversario_mes]}</p>`;
+          })();
+
+          card.innerHTML = `
+            ${m.atendimento ? `<span class="membro-atendimento">${m.atendimento}</span>` : ""}
+            <span class="membro-negocio">${m.negocio}</span>
+            <span class="membro-nome">${m.nome}</span>
+            <p class="membro-faz">${m.oquefaz}</p>
+            ${m.paraquem ? `<p class="membro-para"><span>Para:</span> ${m.paraquem}</p>` : ""}
+            ${aniversarioHtml}
+            ${links ? `<div class="membro-contatos">${links}</div>` : ""}
+          `;
+          grid.appendChild(card);
+        });
+      }
+    }
+
+    // Renderiza aniversariantes na seção Início
+    if (anivEl) {
+      const mesAtual = new Date().getMonth() + 1;
+      const aniversariantes = membros
+        .filter((m) => m.aniversario_mes === mesAtual)
+        .sort((a, b) => a.aniversario_dia - b.aniversario_dia);
+
+      if (aniversariantes.length) {
+        const itens = aniversariantes.map((m) => {
+          const signo = calcularSigno(m.aniversario_dia, m.aniversario_mes);
+          return `
+            <div class="aniversariante-item">
+              <span class="aniversariante-signo">${signo.simbolo}</span>
+              <div class="aniversariante-info">
+                <span class="aniversariante-nome">${m.nome}</span>
+                <span class="aniversariante-detalhe">dia ${m.aniversario_dia} · ${signo.nome}</span>
+              </div>
+            </div>`;
+        }).join("");
+
+        anivEl.innerHTML = `
+          <div class="inner-divider">
+            <div class="inner-divider-line"></div>
+            <span class="inner-divider-dot">✦</span>
+            <div class="inner-divider-line"></div>
+          </div>
+          <span class="section-eyebrow">Aniversariantes de ${nomeMes[mesAtual]}</span>
+          <div class="aniversariantes-list">${itens}</div>`;
+      } else {
+        anivEl.innerHTML = "";
+      }
+    }
   }
 
   function initRedeForm() {
@@ -583,7 +610,12 @@
     function mostrarForm() {
       listaView.style.display = "none";
       formView.style.display = "";
-      if (form) form.style.display = "";
+      const titulo = formView.querySelector(".rede-form-titulo");
+      const sub    = formView.querySelector(".rede-form-sub");
+      if (btnVoltar) btnVoltar.style.display = "";
+      if (titulo) titulo.style.display = "";
+      if (sub)    sub.style.display    = "";
+      if (form)   form.style.display   = "";
       if (sucesso) sucesso.style.display = "none";
       window.scrollTo(0, 0);
     }
@@ -604,13 +636,33 @@
         const btn = form.querySelector(".btn-form-submit");
         if (btn) { btn.disabled = true; btn.textContent = "Enviando..."; }
 
-        const data = Object.fromEntries(new FormData(form).entries());
-        const webhook = CONFIG.webhookCadastroRede;
-        if (webhook) {
-          try { await fetch(webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) }); } catch (_) {}
+        const fd = Object.fromEntries(new FormData(form).entries());
+        if (_sb) {
+          await _sb.from("membros_rede").insert({
+            tipo_cadastro:    fd.tipoCadastro || "proprio",
+            membro_clube_nome: fd.membroClubeNome || null,
+            divulgado_nome:   fd.divulgadoNome   || null,
+            relacao:          fd.relacao          || null,
+            nome:             fd.nome,
+            negocio:          fd.negocio,
+            oquefaz:          fd.oquefaz,
+            paraquem:         fd.paraquem         || null,
+            atendimento:      fd.atendimento      || null,
+            instagram:        fd.instagram        || null,
+            whatsapp:         fd.whatsapp         || null,
+            site:             fd.site             || null,
+            aniversario_dia:  fd.aniversarioDia  ? parseInt(fd.aniversarioDia,  10) : null,
+            aniversario_mes:  fd.aniversarioMes  ? parseInt(fd.aniversarioMes,  10) : null,
+            aprovado:         true,
+          });
         }
 
-        if (form) form.style.display = "none";
+        const titulo = formView.querySelector(".rede-form-titulo");
+        const sub    = formView.querySelector(".rede-form-sub");
+        if (btnVoltar) btnVoltar.style.display = "none";
+        if (titulo) titulo.style.display = "none";
+        if (sub)    sub.style.display    = "none";
+        if (form)   form.style.display   = "none";
         if (sucesso) sucesso.style.display = "";
         window.scrollTo(0, 0);
       });
