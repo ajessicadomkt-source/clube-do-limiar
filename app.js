@@ -69,6 +69,7 @@
       app.classList.add("visible");
       renderAll();
       initRoteiroToggle();
+      initRedeForm();
     }
     setTimeout(() => bindCursorHover("a, button, .arquivo-card, .nav-link"), 100);
   }
@@ -108,6 +109,8 @@
     if (target) target.classList.add("active");
     const link = document.querySelector(`.nav-link[data-section="${id}"]`);
     if (link) link.classList.add("active");
+    // Atualiza a URL com o hash da seção
+    history.replaceState(null, "", "#" + id);
     // Fecha nav mobile ao navegar
     if (nav && nav.classList.contains("open")) toggleNav();
     // Scroll ao topo
@@ -145,7 +148,10 @@
     renderArquivo();
     renderAgenda();
     renderMembros();
-    showSection("inicio");
+    // Abre a seção indicada pelo hash da URL, ou Início por padrão
+    const hash = window.location.hash.replace("#", "");
+    const secoes = ["inicio", "mes", "arquivo", "agenda", "membros"];
+    showSection(secoes.includes(hash) ? hash : "inicio");
   }
 
   // Helpers
@@ -170,8 +176,8 @@
     if (encontroEl && proximo) {
       encontroEl.innerHTML = `
         <span class="card-tag">Próximo encontro</span>
-        <p class="card-body">${proximo.data}</p>
-        <p class="card-detail">${proximo.local}</p>
+        <p class="card-body">${proximo.data || "Data em breve"}</p>
+        ${proximo.local ? `<p class="card-detail">${proximo.local}</p>` : ""}
       `;
     }
 
@@ -442,6 +448,7 @@
         <div class="agenda-corpo">
           ${item.proximo ? `<span class="agenda-badge">Próximo encontro</span>` : ""}
           <span class="agenda-tema">${item.tema}</span>
+          ${item.subtema ? `<p class="agenda-subtema">${item.subtema}</p>` : ""}
           ${item.data ? `<p class="agenda-detalhe">
             <span class="agenda-data-hora">${[item.diaSemana, item.data].filter(Boolean).join(", ")}${item.horario ? " · " + item.horario : ""}</span>
             ${item.local ? `<br><span class="${item.confirmado ? "" : "agenda-a-confirmar"}">${item.local}</span>` : ""}
@@ -463,24 +470,90 @@
     }
   }
 
-  // ------ MEMBROS ------
+  // ------ REDE DE PROSPERIDADE ------
   function renderMembros() {
     const grid = document.getElementById("membros-grid");
     if (!grid) return;
     grid.innerHTML = "";
 
+    if (!MEMBROS.length) {
+      grid.innerHTML = `<p class="rede-vazia">Os cadastros aparecerão aqui em breve.</p>`;
+      return;
+    }
+
     MEMBROS.forEach((m) => {
       const card = el("div", "membro-card");
-      const avatar = m.foto
-        ? `<div class="membro-foto-wrap"><img src="${m.foto}" alt="${m.nome}" class="membro-foto" loading="lazy"></div>`
-        : `<div class="membro-inicial">${m.nome.charAt(0).toUpperCase()}</div>`;
+      const links = [
+        m.instagram ? `<a href="${m.instagram}" target="_blank" rel="noopener" class="membro-link">Instagram</a>` : "",
+        m.whatsapp  ? `<a href="${m.whatsapp}" target="_blank" rel="noopener" class="membro-link">WhatsApp</a>` : "",
+        m.site      ? `<a href="${m.site}" target="_blank" rel="noopener" class="membro-link">Site</a>` : "",
+      ].filter(Boolean).join("");
+
       card.innerHTML = `
-        ${avatar}
+        ${m.atendimento ? `<span class="membro-atendimento">${m.atendimento}</span>` : ""}
+        <span class="membro-negocio">${m.negocio}</span>
         <span class="membro-nome">${m.nome}</span>
-        <p class="membro-frase">${m.frase}</p>
+        <p class="membro-faz">${m.oquefaz}</p>
+        ${m.paraquem   ? `<p class="membro-para"><span>Para:</span> ${m.paraquem}</p>` : ""}
+        ${m.comoindicar ? `<p class="membro-indicar"><span>Como indicar:</span> ${m.comoindicar}</p>` : ""}
+        ${links ? `<div class="membro-contatos">${links}</div>` : ""}
       `;
       grid.appendChild(card);
     });
+  }
+
+  function initRedeForm() {
+    const btnAbrir    = document.getElementById("btn-abrir-cadastro");
+    const btnVoltar   = document.getElementById("btn-voltar-rede");
+    const btnVoltaPos = document.getElementById("btn-volta-apos-envio");
+    const listaView   = document.getElementById("rede-lista");
+    const formView    = document.getElementById("rede-form");
+    const form        = document.getElementById("form-cadastro-rede");
+    const sucesso     = document.getElementById("form-sucesso");
+    const camposConj  = document.getElementById("campos-conjuge");
+
+    if (!btnAbrir || !formView || !listaView) return;
+
+    function mostrarLista() {
+      formView.style.display = "none";
+      listaView.style.display = "";
+      window.scrollTo(0, 0);
+    }
+    function mostrarForm() {
+      listaView.style.display = "none";
+      formView.style.display = "";
+      if (form) form.style.display = "";
+      if (sucesso) sucesso.style.display = "none";
+      window.scrollTo(0, 0);
+    }
+
+    btnAbrir.addEventListener("click", mostrarForm);
+    if (btnVoltar)   btnVoltar.addEventListener("click", mostrarLista);
+    if (btnVoltaPos) btnVoltaPos.addEventListener("click", mostrarLista);
+
+    document.querySelectorAll('input[name="tipoCadastro"]').forEach((r) => {
+      r.addEventListener("change", () => {
+        if (camposConj) camposConj.style.display = r.value === "conjuge" ? "" : "none";
+      });
+    });
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector(".btn-form-submit");
+        if (btn) { btn.disabled = true; btn.textContent = "Enviando..."; }
+
+        const data = Object.fromEntries(new FormData(form).entries());
+        const webhook = CONFIG.webhookCadastroRede;
+        if (webhook) {
+          try { await fetch(webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) }); } catch (_) {}
+        }
+
+        if (form) form.style.display = "none";
+        if (sucesso) sucesso.style.display = "";
+        window.scrollTo(0, 0);
+      });
+    }
   }
 
   // ------ ROTEIRO TOGGLE ------
