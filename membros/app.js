@@ -545,6 +545,7 @@
           card.innerHTML = `
             ${m.atendimento ? `<span class="membro-atendimento">${m.atendimento}</span>` : ""}
             <span class="membro-negocio">${m.negocio}</span>
+            ${m.categoria ? `<span class="membro-categoria">${m.categoria}</span>` : ""}
             <span class="membro-nome">${m.nome}</span>
             <p class="membro-faz">${m.oquefaz}</p>
             ${m.paraquem ? `<p class="membro-para"><span>Para:</span> ${m.paraquem}</p>` : ""}
@@ -645,6 +646,7 @@
             relacao:          fd.relacao          || null,
             nome:             fd.nome,
             negocio:          fd.negocio,
+            categoria:        fd.categoria        || null,
             oquefaz:          fd.oquefaz,
             paraquem:         fd.paraquem         || null,
             atendimento:      fd.atendimento      || null,

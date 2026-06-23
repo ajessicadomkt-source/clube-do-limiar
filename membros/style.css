@@ -1171,6 +1171,18 @@ body {
   color: var(--light-text);
   display: block;
 }
+.membro-categoria {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--light-accent);
+  display: inline-block;
+  background: rgba(123,94,167,0.12);
+  border: 1px solid rgba(123,94,167,0.25);
+  border-radius: 2px;
+  padding: 0.15em 0.55em;
+  margin: 0.2rem 0 0.4rem;
+}
 .membro-nome {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1rem;
