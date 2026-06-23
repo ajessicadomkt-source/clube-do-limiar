@@ -156,7 +156,7 @@
     renderMembros();
     // Abre a seção indicada pelo hash da URL, ou Início por padrão
     const hash = window.location.hash.replace("#", "");
-    const secoes = ["inicio", "mes", "arquivo", "agenda", "membros"];
+    const secoes = ["inicio", "mes", "arquivo", "agenda", "moai"];
     showSection(secoes.includes(hash) ? hash : "inicio");
   }
 
