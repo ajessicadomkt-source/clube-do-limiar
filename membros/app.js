@@ -200,6 +200,44 @@
         <p class="semente-texto">"${afirmacao}"</p>
       `;
     }
+
+    // Aniversariantes do mês
+    const anivEl = document.getElementById("inicio-aniversariantes");
+    if (anivEl) {
+      const mesAtual = new Date().getMonth() + 1;
+      const meses = ["","janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+      const aniversariantes = MEMBROS.filter((m) => {
+        if (!m.aniversario) return false;
+        const mes = parseInt(m.aniversario.split("/")[1], 10);
+        return mes === mesAtual;
+      }).sort((a, b) => parseInt(a.aniversario) - parseInt(b.aniversario));
+
+      if (aniversariantes.length) {
+        const itens = aniversariantes.map((m) => {
+          const [dia, mes] = m.aniversario.split("/").map(Number);
+          const signo = calcularSigno(dia, mes);
+          return `
+            <div class="aniversariante-item">
+              <span class="aniversariante-signo">${signo.simbolo}</span>
+              <div class="aniversariante-info">
+                <span class="aniversariante-nome">${m.nome}</span>
+                <span class="aniversariante-detalhe">dia ${dia} · ${signo.nome}</span>
+              </div>
+            </div>`;
+        }).join("");
+
+        anivEl.innerHTML = `
+          <div class="inner-divider">
+            <div class="inner-divider-line"></div>
+            <span class="inner-divider-dot">✦</span>
+            <div class="inner-divider-line"></div>
+          </div>
+          <span class="section-eyebrow">Aniversariantes de ${meses[mesAtual]}</span>
+          <div class="aniversariantes-list">${itens}</div>`;
+      } else {
+        anivEl.innerHTML = "";
+      }
+    }
   }
 
   // ------ MÊS ATUAL ------
@@ -470,6 +508,23 @@
     }
   }
 
+  // ------ SIGNO ------
+  function calcularSigno(dia, mes) {
+    if ((mes === 12 && dia >= 22) || (mes === 1 && dia <= 19)) return { nome: "Capricórnio", simbolo: "♑" };
+    if ((mes === 1 && dia >= 20) || (mes === 2 && dia <= 18)) return { nome: "Aquário",      simbolo: "♒" };
+    if ((mes === 2 && dia >= 19) || (mes === 3 && dia <= 20)) return { nome: "Peixes",       simbolo: "♓" };
+    if ((mes === 3 && dia >= 21) || (mes === 4 && dia <= 19)) return { nome: "Áries",        simbolo: "♈" };
+    if ((mes === 4 && dia >= 20) || (mes === 5 && dia <= 20)) return { nome: "Touro",        simbolo: "♉" };
+    if ((mes === 5 && dia >= 21) || (mes === 6 && dia <= 20)) return { nome: "Gêmeos",       simbolo: "♊" };
+    if ((mes === 6 && dia >= 21) || (mes === 7 && dia <= 22)) return { nome: "Câncer",       simbolo: "♋" };
+    if ((mes === 7 && dia >= 23) || (mes === 8 && dia <= 22)) return { nome: "Leão",         simbolo: "♌" };
+    if ((mes === 8 && dia >= 23) || (mes === 9 && dia <= 22)) return { nome: "Virgem",       simbolo: "♍" };
+    if ((mes === 9 && dia >= 23) || (mes === 10 && dia <= 22)) return { nome: "Libra",       simbolo: "♎" };
+    if ((mes === 10 && dia >= 23) || (mes === 11 && dia <= 21)) return { nome: "Escorpião",  simbolo: "♏" };
+    if ((mes === 11 && dia >= 22) || (mes === 12 && dia <= 21)) return { nome: "Sagitário",  simbolo: "♐" };
+    return { nome: "Capricórnio", simbolo: "♑" };
+  }
+
   // ------ REDE DE PROSPERIDADE ------
   function renderMembros() {
     const grid = document.getElementById("membros-grid");
@@ -485,7 +540,7 @@
       const card = el("div", "membro-card");
       const links = [
         m.instagram ? `<a href="${m.instagram}" target="_blank" rel="noopener" class="membro-link">Instagram</a>` : "",
-        m.whatsapp  ? `<a href="${m.whatsapp}" target="_blank" rel="noopener" class="membro-link">WhatsApp</a>` : "",
+        m.whatsapp  ? `<a href="https://wa.me/55${m.whatsapp.replace(/\D/g,'')}" target="_blank" rel="noopener" class="membro-link">WhatsApp</a>` : "",
         m.site      ? `<a href="${m.site}" target="_blank" rel="noopener" class="membro-link">Site</a>` : "",
       ].filter(Boolean).join("");
 
@@ -494,8 +549,14 @@
         <span class="membro-negocio">${m.negocio}</span>
         <span class="membro-nome">${m.nome}</span>
         <p class="membro-faz">${m.oquefaz}</p>
-        ${m.paraquem   ? `<p class="membro-para"><span>Para:</span> ${m.paraquem}</p>` : ""}
-        ${m.comoindicar ? `<p class="membro-indicar"><span>Como indicar:</span> ${m.comoindicar}</p>` : ""}
+        ${m.paraquem ? `<p class="membro-para"><span>Para:</span> ${m.paraquem}</p>` : ""}
+        ${(() => {
+          if (!m.aniversario) return "";
+          const [dia, mes] = m.aniversario.split("/").map(Number);
+          const signo = calcularSigno(dia, mes);
+          const meses = ["","janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+          return `<p class="membro-aniversario">${signo.simbolo} ${signo.nome} · ${dia} de ${meses[mes]}</p>`;
+        })()}
         ${links ? `<div class="membro-contatos">${links}</div>` : ""}
       `;
       grid.appendChild(card);

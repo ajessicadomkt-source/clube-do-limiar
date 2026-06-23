@@ -1360,6 +1360,67 @@ body {
 .btn-form-submit:hover { opacity: 0.85; }
 .btn-form-submit:disabled { opacity: 0.5; cursor: default; }
 
+/* Aniversariantes */
+.aniversariantes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+.aniversariante-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.aniversariante-signo {
+  font-size: 1.25rem;
+  color: var(--light-gold);
+  opacity: 0.85;
+  flex-shrink: 0;
+  width: 1.5rem;
+  text-align: center;
+}
+.aniversariante-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.aniversariante-nome {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  color: var(--light-text);
+}
+.aniversariante-detalhe {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: var(--light-text-dim);
+}
+
+/* Aniversário no card da Rede */
+.membro-aniversario {
+  font-size: 0.75rem;
+  color: var(--light-text-dim);
+  margin: 0.1rem 0;
+  letter-spacing: 0.02em;
+}
+
+/* Campo aniversário no formulário */
+.aniversario-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 0.5rem;
+}
+.form-hint-label {
+  font-size: 0.62rem;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--light-text-dim);
+  font-style: italic;
+}
+.form-select { cursor: pointer; }
+
 .form-aviso {
   font-size: 0.75rem;
   color: var(--light-text-dim);

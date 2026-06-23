@@ -137,6 +137,10 @@
       <div class="semente-box" id="inicio-semente">
         <!-- preenchido pelo app.js -->
       </div>
+
+      <div id="inicio-aniversariantes">
+        <!-- preenchido pelo app.js quando houver aniversariantes no mês -->
+      </div>
     </section>
 
     <!-- ====== MÊS ATUAL ====== -->
@@ -289,6 +293,28 @@
             <input class="form-input" type="text" name="nome" placeholder="Como você quer ser chamado(a)" required>
           </div>
           <div class="form-group">
+            <label class="form-label">Data de nascimento <span class="form-hint-label">(exibida como Aniversário na Rede)</span></label>
+            <div class="aniversario-row">
+              <input class="form-input" type="number" name="aniversarioDia" min="1" max="31" placeholder="Dia">
+              <select class="form-input form-select" name="aniversarioMes">
+                <option value="">Mês</option>
+                <option value="1">Janeiro</option>
+                <option value="2">Fevereiro</option>
+                <option value="3">Março</option>
+                <option value="4">Abril</option>
+                <option value="5">Maio</option>
+                <option value="6">Junho</option>
+                <option value="7">Julho</option>
+                <option value="8">Agosto</option>
+                <option value="9">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
             <label class="form-label">Nome do trabalho / negócio <span class="form-required">*</span></label>
             <input class="form-input" type="text" name="negocio" placeholder="Ex: Studio Lara, Consultoria Mendes..." required>
           </div>
@@ -318,7 +344,7 @@
           </div>
           <div class="form-group">
             <label class="form-label">WhatsApp</label>
-            <input class="form-input" type="url" name="whatsapp" placeholder="https://wa.me/5551999999999">
+            <input class="form-input" type="text" name="whatsapp" placeholder="51 9 9999-9999">
           </div>
           <div class="form-group">
             <label class="form-label">Site ou link principal</label>
