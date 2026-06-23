@@ -94,7 +94,6 @@
         </svg>
         Agenda
       </a>
-      <!-- Aba Membros temporariamente desativada — reativar quando as fotos estiverem prontas
       <a href="#" class="nav-link" data-section="membros">
         <svg class="nav-icon" viewBox="0 0 14 14" fill="none">
           <circle cx="5" cy="4.5" r="2.5" stroke="currentColor" stroke-width="0.9"/>
@@ -102,9 +101,8 @@
           <circle cx="10" cy="5" r="2" stroke="currentColor" stroke-width="0.9"/>
           <path d="M12 12C12 10.3 11.1 9 10 8.5" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
         </svg>
-        Membros
+        Rede
       </a>
-      -->
     </div>
 
     <div class="nav-footer">
@@ -222,15 +220,130 @@
       </div>
     </section>
 
-    <!-- ====== MEMBROS ====== -->
+    <!-- ====== REDE DE PROSPERIDADE ====== -->
     <section class="section" id="section-membros">
-      <span class="section-eyebrow">O círculo</span>
-      <h1 class="section-title">Membros</h1>
-      <p class="section-sub">Máximo de 15 pessoas. O tamanho é intencional.</p>
+      <span class="section-eyebrow">Moai do Limiar</span>
+      <h1 class="section-title">Rede de Prosperidade</h1>
 
-      <div class="membros-grid" id="membros-grid">
-        <!-- preenchido pelo app.js -->
+      <!-- Vista: lista de cadastros -->
+      <div id="rede-lista">
+        <div class="rede-intro">
+          <p>A Rede de Prosperidade do Limiar fortalece os vínculos entre os membros do Clube e incentiva que a prosperidade circule dentro da nossa comunidade.</p>
+          <p>Inspirada no espírito do Moai, esta seção é um espaço para divulgar e apoiar trabalhos, serviços e projetos de quem caminha conosco.</p>
+          <p>Cada membro pode compartilhar seu próprio trabalho ou, caso não tenha um negócio próprio, indicar o de um cônjuge ou companheiro(a). A proposta não é vender, mas criar uma rede de confiança — onde possamos olhar primeiro para quem está perto.</p>
+          <p class="rede-aviso">Este é um espaço de visibilidade, respeito e conexão. Cada serviço é de responsabilidade de quem o oferece, e o Clube apenas facilita o encontro entre os membros.</p>
+        </div>
+
+        <div class="membros-grid" id="membros-grid">
+          <!-- preenchido pelo app.js -->
+        </div>
+
+        <div class="rede-cta">
+          <button class="btn-rede-cadastrar" id="btn-abrir-cadastro">+ Cadastrar meu trabalho</button>
+        </div>
       </div>
+
+      <!-- Vista: formulário de cadastro -->
+      <div id="rede-form" class="rede-form-view" style="display:none;">
+        <button class="rede-back-btn" id="btn-voltar-rede">← voltar</button>
+        <h2 class="rede-form-titulo">Cadastre seu trabalho</h2>
+        <p class="rede-form-sub">Preencha com cuidado — estas informações serão exibidas para os outros membros do Clube.</p>
+
+        <form id="form-cadastro-rede" class="rede-form" novalidate>
+
+          <fieldset class="form-group">
+            <legend class="form-label">Este cadastro é para:</legend>
+            <label class="form-radio">
+              <input type="radio" name="tipoCadastro" value="proprio" checked>
+              Meu próprio trabalho, serviço, projeto ou negócio
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="tipoCadastro" value="conjuge">
+              Trabalho, serviço, projeto ou negócio do meu cônjuge / companheiro(a)
+            </label>
+          </fieldset>
+
+          <div id="campos-conjuge" style="display:none;">
+            <p class="form-info">Preencha as informações abaixo com os dados da pessoa/projeto que será divulgado.</p>
+            <div class="form-group">
+              <label class="form-label">Nome do membro do Clube</label>
+              <input class="form-input" type="text" name="membroClubeNome" placeholder="Seu nome completo">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Nome da pessoa / projeto divulgado</label>
+              <input class="form-input" type="text" name="divulgadoNome" placeholder="Nome de quem será divulgado">
+            </div>
+            <fieldset class="form-group">
+              <legend class="form-label">Relação com o membro</legend>
+              <label class="form-radio">
+                <input type="radio" name="relacao" value="conjuge"> Cônjuge
+              </label>
+              <label class="form-radio">
+                <input type="radio" name="relacao" value="companheiroA"> Companheiro(a)
+              </label>
+            </fieldset>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Nome <span class="form-required">*</span></label>
+            <input class="form-input" type="text" name="nome" placeholder="Como você quer ser chamado(a)" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nome do trabalho / negócio <span class="form-required">*</span></label>
+            <input class="form-input" type="text" name="negocio" placeholder="Ex: Studio Lara, Consultoria Mendes..." required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">O que você faz <span class="form-required">*</span></label>
+            <textarea class="form-textarea" name="oquefaz" rows="3" placeholder="Descreva seu trabalho ou serviço em poucas linhas" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Para quem é o seu serviço / produto</label>
+            <input class="form-input" type="text" name="paraquem" placeholder="Quem se beneficia do que você oferece">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Como as pessoas podem te indicar</label>
+            <input class="form-input" type="text" name="comoindicar" placeholder="Ex: Manda meu Instagram, fala que me conhece pelo Clube...">
+          </div>
+          <fieldset class="form-group">
+            <legend class="form-label">Atendimento <span class="form-required">*</span></legend>
+            <label class="form-radio">
+              <input type="radio" name="atendimento" value="Online"> Online
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="atendimento" value="Presencial"> Presencial
+            </label>
+            <label class="form-radio">
+              <input type="radio" name="atendimento" value="Online e Presencial"> Online e Presencial
+            </label>
+          </fieldset>
+          <div class="form-group">
+            <label class="form-label">Instagram</label>
+            <input class="form-input" type="text" name="instagram" placeholder="@usuario">
+          </div>
+          <div class="form-group">
+            <label class="form-label">WhatsApp</label>
+            <input class="form-input" type="text" name="whatsapp" placeholder="51 9 9999-9999">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Site ou link principal</label>
+            <input class="form-input" type="text" name="site" placeholder="www.exemplo.com.br">
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-form-submit">Enviar cadastro</button>
+          </div>
+          <p class="form-aviso">Após o envio, sua entrada será revisada antes de aparecer na Rede.</p>
+
+        </form>
+
+        <div id="form-sucesso" style="display:none;" class="form-sucesso">
+          <p class="form-sucesso-ico">✦</p>
+          <h3 class="form-sucesso-titulo">Cadastro recebido</h3>
+          <p class="form-sucesso-texto">Em breve seu trabalho aparecerá na Rede de Prosperidade do Limiar.</p>
+          <button class="rede-back-btn" id="btn-volta-apos-envio">← Voltar para a Rede</button>
+        </div>
+      </div>
+
     </section>
 
   </main>

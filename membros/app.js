@@ -69,6 +69,7 @@
       app.classList.add("visible");
       renderAll();
       initRoteiroToggle();
+      initRedeForm();
     }
     setTimeout(() => bindCursorHover("a, button, .arquivo-card, .nav-link"), 100);
   }
@@ -469,24 +470,90 @@
     }
   }
 
-  // ------ MEMBROS ------
+  // ------ REDE DE PROSPERIDADE ------
   function renderMembros() {
     const grid = document.getElementById("membros-grid");
     if (!grid) return;
     grid.innerHTML = "";
 
+    if (!MEMBROS.length) {
+      grid.innerHTML = `<p class="rede-vazia">Os cadastros aparecerão aqui em breve.</p>`;
+      return;
+    }
+
     MEMBROS.forEach((m) => {
       const card = el("div", "membro-card");
-      const avatar = m.foto
-        ? `<div class="membro-foto-wrap"><img src="${m.foto}" alt="${m.nome}" class="membro-foto" loading="lazy"></div>`
-        : `<div class="membro-inicial">${m.nome.charAt(0).toUpperCase()}</div>`;
+      const links = [
+        m.instagram ? `<a href="https://instagram.com/${m.instagram.replace("@","")}" target="_blank" rel="noopener" class="membro-link">Instagram</a>` : "",
+        m.whatsapp  ? `<a href="https://wa.me/55${m.whatsapp.replace(/\D/g,"")}" target="_blank" rel="noopener" class="membro-link">WhatsApp</a>` : "",
+        m.site      ? `<a href="${m.site.startsWith("http") ? m.site : "https://"+m.site}" target="_blank" rel="noopener" class="membro-link">Site</a>` : "",
+      ].filter(Boolean).join("");
+
       card.innerHTML = `
-        ${avatar}
+        ${m.atendimento ? `<span class="membro-atendimento">${m.atendimento}</span>` : ""}
+        <span class="membro-negocio">${m.negocio}</span>
         <span class="membro-nome">${m.nome}</span>
-        <p class="membro-frase">${m.frase}</p>
+        <p class="membro-faz">${m.oquefaz}</p>
+        ${m.paraquem   ? `<p class="membro-para"><span>Para:</span> ${m.paraquem}</p>` : ""}
+        ${m.comoindicar ? `<p class="membro-indicar"><span>Como indicar:</span> ${m.comoindicar}</p>` : ""}
+        ${links ? `<div class="membro-contatos">${links}</div>` : ""}
       `;
       grid.appendChild(card);
     });
+  }
+
+  function initRedeForm() {
+    const btnAbrir    = document.getElementById("btn-abrir-cadastro");
+    const btnVoltar   = document.getElementById("btn-voltar-rede");
+    const btnVoltaPos = document.getElementById("btn-volta-apos-envio");
+    const listaView   = document.getElementById("rede-lista");
+    const formView    = document.getElementById("rede-form");
+    const form        = document.getElementById("form-cadastro-rede");
+    const sucesso     = document.getElementById("form-sucesso");
+    const camposConj  = document.getElementById("campos-conjuge");
+
+    if (!btnAbrir || !formView || !listaView) return;
+
+    function mostrarLista() {
+      formView.style.display = "none";
+      listaView.style.display = "";
+      window.scrollTo(0, 0);
+    }
+    function mostrarForm() {
+      listaView.style.display = "none";
+      formView.style.display = "";
+      if (form) form.style.display = "";
+      if (sucesso) sucesso.style.display = "none";
+      window.scrollTo(0, 0);
+    }
+
+    btnAbrir.addEventListener("click", mostrarForm);
+    if (btnVoltar)   btnVoltar.addEventListener("click", mostrarLista);
+    if (btnVoltaPos) btnVoltaPos.addEventListener("click", mostrarLista);
+
+    document.querySelectorAll('input[name="tipoCadastro"]').forEach((r) => {
+      r.addEventListener("change", () => {
+        if (camposConj) camposConj.style.display = r.value === "conjuge" ? "" : "none";
+      });
+    });
+
+    if (form) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = form.querySelector(".btn-form-submit");
+        if (btn) { btn.disabled = true; btn.textContent = "Enviando..."; }
+
+        const data = Object.fromEntries(new FormData(form).entries());
+        const webhook = CONFIG.webhookCadastroRede;
+        if (webhook) {
+          try { await fetch(webhook, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) }); } catch (_) {}
+        }
+
+        if (form) form.style.display = "none";
+        if (sucesso) sucesso.style.display = "";
+        window.scrollTo(0, 0);
+      });
+    }
   }
 
   // ------ ROTEIRO TOGGLE ------

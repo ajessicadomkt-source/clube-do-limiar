@@ -17,6 +17,7 @@ const CONFIG = {
   subtitulo: "investigação simbólica da vida interior",
   facilitadora: "Jessica",
   calendarUrl: "https://calendar.google.com/calendar/u/0?cid=Y2YzMWYzMDllMjkzMDIxYTUxNTU1ZTQ2OWExZDkyODI2YjE4Njc4OGUxMWExZDI1NTE0NjMzZGI2YzZjZTdmNkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+  webhookCadastroRede: "", // cole aqui o webhook do N8N quando estiver configurado
 };
 
 // ------------------------------------------------------------
