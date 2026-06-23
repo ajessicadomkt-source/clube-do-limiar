@@ -1275,13 +1275,13 @@ body {
   font-family: 'Cinzel', serif;
   font-weight: 300;
   font-size: 1.3rem;
-  color: var(--light-text);
+  color: var(--text);
   margin-bottom: 0.5rem;
 }
 .rede-form-sub {
   font-family: 'Cormorant Garamond', serif;
   font-size: 0.95rem;
-  color: var(--light-text-dim);
+  color: var(--text-mid);
   font-style: italic;
   margin-bottom: 2.5rem;
   line-height: 1.65;
@@ -1304,12 +1304,12 @@ body {
 }
 .form-label {
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.68rem;
+  font-size: 0.78rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--light-text);
+  color: var(--text-mid);
 }
-.form-required { color: var(--light-gold); }
+.form-required { color: var(--accent); }
 
 .form-input,
 .form-textarea {
