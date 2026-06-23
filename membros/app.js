@@ -484,9 +484,9 @@
     MEMBROS.forEach((m) => {
       const card = el("div", "membro-card");
       const links = [
-        m.instagram ? `<a href="https://instagram.com/${m.instagram.replace("@","")}" target="_blank" rel="noopener" class="membro-link">Instagram</a>` : "",
-        m.whatsapp  ? `<a href="https://wa.me/55${m.whatsapp.replace(/\D/g,"")}" target="_blank" rel="noopener" class="membro-link">WhatsApp</a>` : "",
-        m.site      ? `<a href="${m.site.startsWith("http") ? m.site : "https://"+m.site}" target="_blank" rel="noopener" class="membro-link">Site</a>` : "",
+        m.instagram ? `<a href="${m.instagram}" target="_blank" rel="noopener" class="membro-link">Instagram</a>` : "",
+        m.whatsapp  ? `<a href="${m.whatsapp}" target="_blank" rel="noopener" class="membro-link">WhatsApp</a>` : "",
+        m.site      ? `<a href="${m.site}" target="_blank" rel="noopener" class="membro-link">Site</a>` : "",
       ].filter(Boolean).join("");
 
       card.innerHTML = `
