@@ -5,6 +5,12 @@
 // ============================================================
 
 // ------------------------------------------------------------
+// SUPABASE
+// ------------------------------------------------------------
+const SUPABASE_URL      = "https://ijwtilovakdmjhgxsach.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlqd3RpbG92YWtkbWpoZ3hzYWNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyMzUwNTQsImV4cCI6MjA5NzgxMTA1NH0.sP3IjyrSE52G3Zi1sj7DoD0KaDANNeXzZvg9wjPi8KU";
+
+// ------------------------------------------------------------
 // SENHA DE ACESSO
 // ------------------------------------------------------------
 const SENHA_ACESSO = "limiar2025";
