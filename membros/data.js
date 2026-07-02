@@ -60,8 +60,8 @@ const MES_ATUAL = {
   },
 
   encontro: {
-    data: "",
-    diaSemana: "",
+    data: "19 de julho de 2026",
+    diaSemana: "Domingo",
     horario: "",
     local: "",
     tema: "Tudo ao Seu Tempo",
@@ -182,11 +182,11 @@ const AGENDA = [
     numero: "02",
     tema: "Tudo ao Seu Tempo",
     subtema: "O que culturas milenares sabem sobre o tempo que nós esquecemos",
-    data: "",
-    diaSemana: "",
+    data: "19 de julho de 2026",
+    diaSemana: "Domingo",
     horario: "",
     local: "",
-    confirmado: false,
+    confirmado: true,
     proximo: true,
   },
   {
